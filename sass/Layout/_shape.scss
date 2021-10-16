@@ -8,4 +8,10 @@
     img{
         overflow:hidden;
     }
+    @include media('<tablet'){
+        display:none;
+    }
+}
+body{ 
+    overflow:hidden;
 }

@@ -8,4 +8,9 @@
     img{
         width:100%;
     }
+    @include media('<tablet'){
+        width:100% !important; 
+        min-width:100% !important;
+    }
+
 }

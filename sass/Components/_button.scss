@@ -1,0 +1,75 @@
+.button{ 
+    padding:12px;
+    box-shadow: 4px 4px 4px rgba(0,0,0,0.3);
+    border-radius: 5px;
+    border:none;
+    font-size:$stress--font-size;
+    font-family:$stress--font-family;
+    transition: all 0.25s ease-in-out;
+    cursor:pointer;
+    &:hover{
+        padding:16px;
+        box-shadow: 12px 12px 4px rgba(0,0,0,0.3);
+    }
+    @include media('<tablet'){
+        padding:6px;
+        &:hover{
+            padding:8px;
+            box-shadow: 12px 12px 4px rgba(0,0,0,0.3);
+        }
+    }
+}
+.buttons{ 
+    display:flex; 
+}
+.button-valid{ 
+    background-color:$green;
+    color:white;  
+    height:fit-content;  
+    @include media('<bigPhone'){
+        width:fit-content; 
+        margin-inline:auto;
+        justify-content: center;
+        margin-bottom:12px;
+    }
+}
+.button-primary{
+    display:flex;
+    height:fit-content;
+    background-color:$pink;
+    color:white;
+}
+.button-secondary{
+    display:flex;
+    height:fit-content;
+    background-color:$purple;
+    color:white;
+    @include media('<bigPhone'){
+        width:fit-content; 
+        margin-inline:auto;
+        margin-top:12px;
+    }
+}
+
+.buttons--home{ 
+    margin-top:5vw;
+    justify-content: space-around;
+    @include media('<bigPhone'){
+        display:block; 
+        width:fit-content; 
+        margin-inline:auto;
+    }
+}
+.buttons--signIn{ 
+    margin-top:2vw;
+    width:50%;
+    margin-inline:auto;
+    justify-content:space-around;
+    @include media('<bigPhone'){
+        display:flex;
+        flex-direction:column; 
+        width:fit-content; 
+        justify-content: center;
+        margin-inline:auto;
+    }
+}

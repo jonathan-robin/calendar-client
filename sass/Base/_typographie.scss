@@ -1,0 +1,20 @@
+.title{
+    font-size:$title--font-size; 
+    font-family: $title--font-family;
+}
+.subTitle{
+    font-size:$subTitle--font-size; 
+    font-family: $subTitle--font-family;
+}
+.stress{
+    font-size:$stress--font-size; 
+    font-family: $stress--font-family;
+}
+.regular{
+    font-size:$text--font-size; 
+    font-family: $text--font-family;
+}
+.content-box__signIn .subTitle, .content-box__login .subTitle{
+    color:white; 
+    margin-left:0.5vw;
+}

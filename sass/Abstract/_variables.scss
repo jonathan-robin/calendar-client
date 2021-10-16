@@ -1,0 +1,33 @@
+@font-face{ 
+    font-family: "Ubuntu-light";
+    src: url("./fonts/ubuntu/Ubuntu-Light.ttf");
+}
+@font-face{ 
+    font-family: "Ubuntu";
+    src: url("./fonts/ubuntu/Ubuntu-Regular.ttf");
+}
+@font-face{ 
+    font-family: "Ubuntu-medium";
+    src: url("./fonts/ubuntu/Ubuntu-Medium.ttf");
+}
+@font-face{ 
+    font-family: "Ubuntu-bold";
+    src: url("./fonts/ubuntu/Ubuntu-Bold.ttf");
+}
+
+// FONTS
+$title--font-size: clamp(1.75rem, 3vw, 2.5rem); 
+$title--font-family: "Ubuntu-bold"; 
+$subTitle--font-size: clamp(1.2rem, 2vw, 1.6rem); 
+$subTitle--font-family: "Ubuntu-bold"; 
+$stress--font-size: clamp(0.9rem, 1.65vw, 1.45rem); 
+$stress--font-family: "Ubuntu-medium"; 
+$text--font-size: clamp(0.9rem, 1.5vw, 1.3rem); 
+$text--font-family: "Ubuntu"; 
+
+
+// COLOR: 
+$green: #A9FECB;
+$pink: #FFC8C8; 
+$yellow: #F6FFC8; 
+$purple:#F2C1F9;

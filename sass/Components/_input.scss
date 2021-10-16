@@ -1,0 +1,45 @@
+.input-form{ 
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+    width:fit-content;
+    margin:auto;
+    margin-block: 15px;
+}
+.input{
+    border:none; 
+    border-radius:8px;
+    padding:8px;
+    &::placeholder{
+        color:rgba(0,0,0,0.2)
+    }
+    margin-top:12px;
+}
+.input-form__signIn{
+    background: rgba(255,255,255,.4);
+    padding:12px;
+    border-radius:5px; 
+    box-shadow:4px 4px 10px rgba(0,0,0,.4); 
+    font-size:$stress--font-size; 
+    font-family:$stress--font-family; 
+    color:white;
+    text-shadow: 0.5px 0.5px 2px rgba(0,0,0,.4);    
+}
+.input-form__signIn--pseudo{ 
+
+}
+.input-form__signIn--pass{ 
+
+}
+.input-form__signIn--verifPass{ 
+
+}
+.input-form__signIn--label{ 
+
+}
+.input__signIn{
+
+}
+
+
+                

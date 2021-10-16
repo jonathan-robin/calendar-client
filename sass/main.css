@@ -1,3 +1,301 @@
+@font-face {
+  font-family: "Ubuntu-light";
+  src: url("./fonts/ubuntu/Ubuntu-Light.ttf");
+}
+
+@font-face {
+  font-family: "Ubuntu";
+  src: url("./fonts/ubuntu/Ubuntu-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Ubuntu-medium";
+  src: url("./fonts/ubuntu/Ubuntu-Medium.ttf");
+}
+
+@font-face {
+  font-family: "Ubuntu-bold";
+  src: url("./fonts/ubuntu/Ubuntu-Bold.ttf");
+}
+
+.title {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-family: "Ubuntu-bold";
+}
+
+.subTitle {
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  font-family: "Ubuntu-bold";
+}
+
+.stress {
+  font-size: clamp(0.9rem, 1.65vw, 1.45rem);
+  font-family: "Ubuntu-medium";
+}
+
+.regular {
+  font-size: clamp(0.9rem, 1.5vw, 1.3rem);
+  font-family: "Ubuntu";
+}
+
+.content-box__signIn .subTitle, .content-box__login .subTitle {
+  color: white;
+  margin-left: 0.5vw;
+}
+
+.button {
+  padding: 12px;
+  -webkit-box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+          box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  border: none;
+  font-size: clamp(0.9rem, 1.65vw, 1.45rem);
+  font-family: "Ubuntu-medium";
+  -webkit-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
+  cursor: pointer;
+}
+
+.button:hover {
+  padding: 16px;
+  -webkit-box-shadow: 12px 12px 4px rgba(0, 0, 0, 0.3);
+          box-shadow: 12px 12px 4px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 1099px) {
+  .button {
+    padding: 6px;
+  }
+  .button:hover {
+    padding: 8px;
+    -webkit-box-shadow: 12px 12px 4px rgba(0, 0, 0, 0.3);
+            box-shadow: 12px 12px 4px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.button-valid {
+  background-color: #A9FECB;
+  color: white;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
+@media (max-width: 699px) {
+  .button-valid {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    margin-inline: auto;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    margin-bottom: 12px;
+  }
+}
+
+.button-primary {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  background-color: #FFC8C8;
+  color: white;
+}
+
+.button-secondary {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  background-color: #F2C1F9;
+  color: white;
+}
+
+@media (max-width: 699px) {
+  .button-secondary {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    margin-inline: auto;
+    margin-top: 12px;
+  }
+}
+
+.buttons--home {
+  margin-top: 5vw;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+@media (max-width: 699px) {
+  .buttons--home {
+    display: block;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    margin-inline: auto;
+  }
+}
+
+.buttons--signIn {
+  margin-top: 2vw;
+  width: 50%;
+  margin-inline: auto;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+@media (max-width: 699px) {
+  .buttons--signIn {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    margin-inline: auto;
+  }
+}
+
+.input-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: auto;
+  margin-block: 15px;
+}
+
+.input {
+  border: none;
+  border-radius: 8px;
+  padding: 8px;
+  margin-top: 12px;
+}
+
+.input::-webkit-input-placeholder {
+  color: rgba(0, 0, 0, 0.2);
+}
+
+.input:-ms-input-placeholder {
+  color: rgba(0, 0, 0, 0.2);
+}
+
+.input::-ms-input-placeholder {
+  color: rgba(0, 0, 0, 0.2);
+}
+
+.input::placeholder {
+  color: rgba(0, 0, 0, 0.2);
+}
+
+.input-form__signIn {
+  background: rgba(255, 255, 255, 0.4);
+  padding: 12px;
+  border-radius: 5px;
+  -webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+          box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+  font-size: clamp(0.9rem, 1.65vw, 1.45rem);
+  font-family: "Ubuntu-medium";
+  color: white;
+  text-shadow: 0.5px 0.5px 2px rgba(0, 0, 0, 0.4);
+}
+
+.content-box {
+  position: relative;
+  padding: 1vh 2vw;
+}
+
+.content-box--home {
+  width: 40%;
+  margin-left: auto;
+  margin-top: 20vh;
+}
+
+.content-box--home .title:nth-of-type(1) {
+  color: #fff;
+}
+
+.content-box--home .title:nth-of-type(2) {
+  color: #A9FECB;
+  margin-left: 2vw;
+}
+
+.content-box--home .regular {
+  color: #fff;
+  margin-top: 5vh;
+  margin-left: 6vw;
+}
+
+@media (max-width: 1099px) {
+  .content-box--home {
+    width: 50%;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 12px;
+  }
+}
+
+.content-box__signIn {
+  width: 40%;
+  margin-left: auto;
+  margin-top: 20vh;
+}
+
+.content-box__signIn .title:nth-of-type(1) {
+  color: #A9FECB;
+}
+
+.content-box__signIn .regular {
+  color: #fff;
+  width: 70%;
+  margin-left: 4vw;
+  margin-top: 2vw;
+  margin-bottom: 2vw;
+}
+
+@media (max-width: 1099px) {
+  .content-box__signIn {
+    width: 50%;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 12px;
+  }
+}
+
+@media (max-width: 699px) {
+  .content-box__signIn .inline {
+    display: block !important;
+  }
+}
+
 .background-illustration {
   position: absolute;
   top: 50%;
@@ -12,6 +310,13 @@
   width: 100%;
 }
 
+@media (max-width: 1099px) {
+  .background-illustration {
+    width: 100% !important;
+    min-width: 100% !important;
+  }
+}
+
 .brown-shape {
   position: absolute;
   left: 50%;
@@ -23,5 +328,23 @@
 
 .brown-shape img {
   overflow: hidden;
+}
+
+@media (max-width: 1099px) {
+  .brown-shape {
+    display: none;
+  }
+}
+
+body {
+  overflow: hidden;
+}
+
+.inline {
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
 }
 /*# sourceMappingURL=main.css.map */

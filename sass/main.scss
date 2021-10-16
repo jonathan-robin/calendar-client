@@ -1,17 +1,18 @@
 @import './Abstract/variables';
+@import './_breakpoints.scss';
 
 @import './Base/typographie'; 
 
 @import './Components/button'; 
-@import './Components/input';
+@import './Components/_input';
 @import './Components/todo';
+@import './Components/content-box';
 
 @import './Layout/_illustration';
 @import './Layout/_shape';
+@import './Layout/_Layout';
 
 @import './Pages/accueil';
 @import './Pages/login';
 @import './Pages/sign-in';
-
-@import './breakpoints';
 
