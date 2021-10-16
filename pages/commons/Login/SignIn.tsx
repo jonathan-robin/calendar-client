@@ -1,13 +1,17 @@
-import React, {useEffect, useRef} from 'react'; 
+import React, {useEffect, useRef, useState} from 'react'; 
 import Background from '../background';
 import Shape from '../Shape';
 import VanillaTilt from 'vanilla-tilt';
 import { useHistory } from 'react-router';
+import useAxios from '../../../hooks/useAxios';
 
 function SignIn() {
     const inputRef = useRef<HTMLInputElement>(null);
     const history = useHistory();
-
+    const [usernameValue, setUsernameValue] = useState<string | null>(); 
+    const [passValue, setPassValue] = useState<string | null>(); 
+    const [passCheckValue, setPassCheckValue] = useState<string | null>(); 
+    const {instance} = useAxios();
 
     useEffect(() => {
         const destroy:any = document.querySelectorAll('.input-form__signIn'); 
@@ -22,6 +26,35 @@ function SignIn() {
 
     const handleClickLogin = () => {
         history.push('./login');
+    }
+
+    const handleClickCreateAccount = (e:any) => {
+        console.log(usernameValue); 
+        console.log(passValue)
+        e.preventDefault();
+        if (passValue !== passCheckValue){ 
+            return ("Pass doesn't match")
+        }
+        instance.post('/createAccount', {
+            username:usernameValue, 
+            pass:passValue
+        })
+        .then((res) => {
+            console.log(res)
+        })
+
+
+    
+    }
+
+    const HandleOnChangeUsernameValue = (e:React.FormEvent<HTMLInputElement>) => { 
+        setUsernameValue(e.currentTarget.value);
+    }
+    const HandleOnChangePassValue = (e:React.FormEvent<HTMLInputElement>) => { 
+        setPassValue(e.currentTarget.value);
+    }
+    const HandleOnChangePassCheckValue = (e:React.FormEvent<HTMLInputElement>) => { 
+        setPassCheckValue(e.currentTarget.value);
     }
 
     return (
@@ -44,7 +77,7 @@ function SignIn() {
                         <div className="input-form__signIn--label">
                             Nom d'utilisateur
                         </div>
-                            <input className="input input__signIn" ref={inputRef} placeholder="Rentrez votre pseudo">
+                            <input className="input input__signIn" ref={inputRef} onChange={HandleOnChangeUsernameValue} placeholder="Rentrez votre pseudo">
                             </input>
                     </div>
 
@@ -54,7 +87,7 @@ function SignIn() {
                                 Mot de passe
                             </div>
 
-                                <input className="input input__signIn" placeholder="Rentrez un mot de passe">
+                                <input className="input input__signIn" placeholder="Rentrez un mot de passe" onChange={HandleOnChangePassValue}> 
 
                                 </input>
                         </div>
@@ -63,13 +96,13 @@ function SignIn() {
                             <div className="input-form__signIn--label">
                                 Vérification
                             </div>
-                                <input className="input input__signIn" placeholder="Rentrez à nouveau le mot de passe">
+                                <input className="input input__signIn" placeholder="Rentrez à nouveau le mot de passe" onChange={HandleOnChangePassCheckValue}>
                                 </input>
                         </div>
                     </div>
 
                     <div className="buttons buttons--signIn">
-                        <button className='button button-valid'>
+                        <button className='button button-valid' onClick={handleClickCreateAccount}>
                             Valider
                         </button>
                         <button className='button button-primary'>
