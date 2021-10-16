@@ -1,0 +1,27 @@
+.background-illustration {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translate(0%, -50%);
+          transform: translate(0%, -50%);
+  width: 60%;
+  min-width: 700px;
+  max-width: 1000px;
+}
+
+.background-illustration img {
+  width: 100%;
+}
+
+.brown-shape {
+  position: absolute;
+  left: 50%;
+  top: -20%;
+  z-index: -1;
+  width: 70%;
+  overflow: hidden;
+}
+
+.brown-shape img {
+  overflow: hidden;
+}
+/*# sourceMappingURL=main.css.map */

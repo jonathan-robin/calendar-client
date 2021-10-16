@@ -1,0 +1,11 @@
+.background-illustration{
+    position:absolute;
+    top:50%;
+    transform: translate(0%, -50%);
+    width:60%;
+    min-width:700px;
+    max-width:1000px;
+    img{
+        width:100%;
+    }
+}
