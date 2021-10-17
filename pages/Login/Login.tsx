@@ -1,15 +1,20 @@
-import React, {ChangeEventHandler, InputHTMLAttributes, SyntheticEvent, useEffect, useRef, useState} from 'react'; 
+import React, {SyntheticEvent, useEffect, useRef, useState, useContext} from 'react'; 
 import { useHistory } from 'react-router';
-import Background from '../background';
-import Shape from '../Shape';
-import useAxios from '../../../hooks/useAxios';
-
+import Background from '../commons/background';
+import Shape from '../commons/Shape';
+import useAxios from '../../hooks/useAxios';
+import { AxiosResponse } from 'axios';
+import { AuthContext } from '../../context/GlobalState';
+import LoadUserInfos from '../../components/utils/LoadUserInfos';
 
 function Login() {
     const history = useHistory(); 
     const [inputUsernameValue, setInputUsernameValue] = useState<string>();
     const [inputPassValue, setInputPassValue] = useState<string>();
     const {instance} = useAxios()
+    const [authState, setAuthState] = useContext(AuthContext)
+
+    // Stocker globalement refreshToken
 
     const handleClickSignIn = () => { 
         history.push('/SignIn')
@@ -17,7 +22,27 @@ function Login() {
     
     const handleClickLogin  = (event:SyntheticEvent):void  => { 
         event.preventDefault();
-       
+        instance.post('/login',{
+            username:inputUsernameValue, 
+            pass:inputPassValue
+        })
+        .then(async(res:AxiosResponse<any>) => {
+            console.log(res.data.accessToken)
+            setAuthState({token:res.data.accessToken, refreshToken:res.data.refreshToken});
+            instance.defaults.headers.common['authorization'] = `Bearer ${authState.token}`;
+            console.log(authState.token);
+            // refreshToken = response.data.refreshToken 
+            if(res.status === 200 ){
+                console.log('enter 200 login')
+                let t = await LoadUserInfos({instance, headers:authState.token});
+                // setAuthContext()
+                // loadUserInfos();
+                // instance.post('/home', {
+                //     user:res
+                // })
+            }
+        })
+        .then(res => console.log(res))
     }
 
     const handleOnChangeInputUsername = (event:React.FormEvent<HTMLInputElement>) => { 

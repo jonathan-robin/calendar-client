@@ -1,9 +1,9 @@
 import React, {useEffect, useRef, useState} from 'react'; 
-import Background from '../background';
-import Shape from '../Shape';
+import Background from '../commons/background';
+import Shape from '../commons/Shape';
 import VanillaTilt from 'vanilla-tilt';
 import { useHistory } from 'react-router';
-import useAxios from '../../../hooks/useAxios';
+import useAxios from '../../hooks/useAxios';
 
 function SignIn() {
     const inputRef = useRef<HTMLInputElement>(null);
