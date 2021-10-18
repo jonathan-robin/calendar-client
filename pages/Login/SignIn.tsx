@@ -11,7 +11,7 @@ function SignIn() {
     const [usernameValue, setUsernameValue] = useState<string | null>(); 
     const [passValue, setPassValue] = useState<string | null>(); 
     const [passCheckValue, setPassCheckValue] = useState<string | null>(); 
-    const {instance} = useAxios();
+    const instance = useAxios();
 
     useEffect(() => {
         const destroy:any = document.querySelectorAll('.input-form__signIn'); 
@@ -42,9 +42,6 @@ function SignIn() {
         .then((res) => {
             console.log(res)
         })
-
-
-    
     }
 
     const HandleOnChangeUsernameValue = (e:React.FormEvent<HTMLInputElement>) => { 

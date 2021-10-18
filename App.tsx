@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect, useContext} from 'react';
 import { AuthProvider } from './context/GlobalState';
 import './sass/main.css';
 import { BrowserRouter as Router, 
@@ -7,8 +7,20 @@ Route
 import LandingPage from './pages/LandingPage/LandingPage';
 import SignIn from './pages/Login/SignIn';
 import Login from './pages/Login/Login';
+import useAxios from './hooks/useAxios';
+import { AuthContext } from './context/GlobalState';
+import { AxiosPromise, AxiosResponse, AxiosResponseHeaders } from 'axios';
 
+export interface ServerResponseToken{
+    accessToken:'string', 
+    refreshToken:'string'
+}
 function App() {
+  // const instance = useAxios(); 
+  const [authState, setAuthState] = useContext(AuthContext)
+
+
+
   return (
     <AuthProvider>
       <Router>

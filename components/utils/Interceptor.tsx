@@ -1,22 +1,14 @@
-import React from 'react'; 
+import React, {useContext} from 'react'; 
 import useAxios from '../../hooks/useAxios';
 import { AuthContext } from '../../context/GlobalState';
+import { AxiosPromise, AxiosResponse, AxiosResponseHeaders } from 'axios';
 
-function Interceptor() {
-    const {instance} = useAxios(); 
+export interface ServerResponseToken{
+    accessToken:'string', 
+    refreshToken:'string'
+}
 
-
-    // instance.interceptors.response.use((response) =>{
-    //     return response; 
-    // }, async (error) => { 
-    //     const originalRequest = error.config;
-    //     if (error.config.url != '/refreshToken' && error.response.status === 401 && !originalRequest._retry !== true){ 
-    //         originalRequest._retry = true; 
-    //         if (refreshToken && refreshToken != ''){
-
-    //         }
-    //     }
-    // });
+export function Interceptor() {
 
 }
 

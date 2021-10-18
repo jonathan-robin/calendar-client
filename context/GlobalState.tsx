@@ -18,12 +18,12 @@ import React, {useState, createContext} from 'react';
 // };
 
 
-interface authState{
+export interface authState{
     token:string, 
     refreshToken:string
 }
 
-type authStateContext = [authState, React.Dispatch<React.SetStateAction<authState>>]
+export type authStateContext = [authState, React.Dispatch<React.SetStateAction<authState>>]
  
 export const AuthContext = React.createContext<authStateContext>([{token:'',refreshToken:''}, () => null]);
 
