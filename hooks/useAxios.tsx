@@ -19,6 +19,7 @@ function useAxios() {
 
     instance.interceptors.response.use((response) => {return response}, 
     async(error) => { 
+        console.log(error);
         console.error(`[response error] [${JSON.stringify(error)}]`);
         console.log('intercept error');
         const originalRequest = error.config; 

@@ -14,32 +14,29 @@ function Login() {
     const instance = useAxios()
     const [authState, setAuthState] = useContext(AuthContext)
 
-    // Stocker globalement refreshToken
-
     const handleClickSignIn = () => { 
         history.push('/SignIn')
     }
     
-    const handleClickLogin  = (event:SyntheticEvent):void  => { 
+    const handleClickLogin  = async (event:SyntheticEvent):Promise<void>  => { 
         event.preventDefault();
+        
         instance.post('/login',{
             username:inputUsernameValue, 
             pass:inputPassValue
-        })
-        .then(async(res:any) => {
+        }).then(async (res:any) => {
             if(res && res.status === 200 ){
-                console.log(res.data.accessToken)
-                setAuthState({token:res.data.accessToken, refreshToken:res.data.refreshToken});
-                instance.defaults.headers.common['authorization'] = `Bearer ${authState.token}`;
-                console.log(authState.token);
-                console.log(authState.refreshToken);
-                console.log(res.status)
-                console.log('enter 200 login')
-                await LoadUserInfos({instance, headers:authState.token});
+                setAuthState({...authState, token:res.data.accessToken, refreshToken:res.data.refreshToken, username:res.data.username, id: res.data.id });
+                instance.defaults.headers.common['authorization'] = `Bearer ${res.data.accessToken}`;
+                const p = await instance.post('/home');
+                if (p.status === 200) {
+                    return history.push('/home') 
+                }
+                return false;
             }
-        })
-        .then(res => console.log(res))
-    }
+        return false;
+    })
+}
 
     const handleOnChangeInputUsername = (event:React.FormEvent<HTMLInputElement>) => { 
         setInputUsernameValue(event.currentTarget?.value);
@@ -95,7 +92,7 @@ function Login() {
                         </button>
                     </div>
                     <div className="buttons buttons--signIn">
-                    <button className='button button-secondary' onClick={() => handleClickSignIn} >
+                    <button className='button button-secondary' onClick={handleClickSignIn} >
                            Je me crée un compte !
                         </button>
                     </div>

@@ -7,18 +7,26 @@ Route
 import LandingPage from './pages/LandingPage/LandingPage';
 import SignIn from './pages/Login/SignIn';
 import Login from './pages/Login/Login';
+import Home from './pages/home/Home';
 import useAxios from './hooks/useAxios';
 import { AuthContext } from './context/GlobalState';
 import { AxiosPromise, AxiosResponse, AxiosResponseHeaders } from 'axios';
+
 
 export interface ServerResponseToken{
     accessToken:'string', 
     refreshToken:'string'
 }
+
+
 function App() {
   // const instance = useAxios(); 
   const [authState, setAuthState] = useContext(AuthContext)
 
+  useEffect(() => {
+    setAuthState({token:'', refreshToken:'', username:'', id:0}); 
+    console.log(authState)
+  },[])
 
 
   return (
@@ -27,6 +35,7 @@ function App() {
         <Route path="/" exact component={LandingPage} />
         <Route path="/SignIn" exact component={SignIn} />
         <Route path="/login" exact component={Login} />
+        <Route path="/home" exact component={Home} />
       </Router>
     </AuthProvider>
   )

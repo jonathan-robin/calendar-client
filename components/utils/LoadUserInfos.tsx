@@ -1,26 +1,39 @@
 import React,{useContext} from 'react'; 
 import useAxios from '../../hooks/useAxios';
 import { AuthContext } from '../../context/GlobalState';
+import { useHistory } from 'react-router';
 
 
+async function LoadUserInfos(props:{instance:any, headers:any, history:any, authState:any}) {
 
-async function LoadUserInfos(props:{instance:any, headers:any}) {
+    console.log(props.authState)
 
-    console.log(props.headers)
+
     props.instance.defaults.headers.common['authorization'] = `Bearer ${props.headers}`;
 
-    await props.instance.get('/home')
+
+    // .then((res:any) => {
+    //     if(res && res.status === 200 ){
+    //         console.log(res.data.accessToken)
+    //         setAuthState({...authState, token:res.data.accessToken, refreshToken:res.data.refreshToken});
+    //         instance.defaults.headers.common['authorization'] = `Bearer ${authState.token}`;
+    //         console.log('authstate token',authState.token);
+    //         console.log('authstate refreshtoken', authState.refreshToken);
+    //         console.log('resstatus',res.status)
+    //         console.log('enter 200 login')
+    //         LoadUserInfos({instance, headers:authState.token, history:history, authState:[authState, setAuthState]})
+    //     }
+    // })
+
+
+    props.instance.get('/home')
     .then((response:any) => {
-        console.log('enter /home')
-        console.log(response.data)
-        return (response.data)
+        props.authState({...props.authState, username:response.data.username, id: response.data.id })
+        return props.history.push('/home')
     }).catch((err:any) => {
         console.log(err.response.status)
         return err.response.status
     })
-
-
-
 }
 export default LoadUserInfos;
 

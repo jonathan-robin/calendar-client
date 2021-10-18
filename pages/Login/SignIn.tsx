@@ -25,7 +25,7 @@ function SignIn() {
     },[])
 
     const handleClickLogin = () => {
-        history.push('./login');
+        history.push('/login');
     }
 
     const handleClickCreateAccount = (e:any) => {

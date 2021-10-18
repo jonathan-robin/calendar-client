@@ -1,0 +1,61 @@
+.calendar__background{
+    width:40%;
+    margin-left:auto;
+    margin-top:8vh;
+    position:relative; 
+    padding:0.5em;
+    min-width:450px;
+    @include media ('<tablet'){
+        width:50%;
+        padding:20px;
+        background:rgba(0,0,0,.4);
+        border-radius:12px;
+    }
+    .regular{
+        color:#fff;
+        margin-bottom: 0.5em;
+        width:fit-content;
+    }
+    
+}
+.todo{
+    display:flex;
+    color:$pink;
+    align-items: center;
+    display:flex;
+    cursor:pointer;
+    div{
+        margin:5px;
+    }
+}
+.todo-actions{
+    display:flex;
+}
+.calendar-todo--add{
+    display:flex;
+    justify-content: center;
+    color:$pink;
+    cursor:pointer;
+    div{
+        margin:5px;
+    }
+}
+.calendar-todo{
+    background:rgba(0,0,0,.3);
+    padding:2px;
+    border-radius:5px;
+    width:90%;
+    margin:5px;
+    display:flex;
+}
+
+.inner-calendar{ 
+    display:flex;
+    .calendar-hour.left{
+        width:50%;
+   }
+   .calendar-hour.right{
+       width:50%;
+   }
+}
+
