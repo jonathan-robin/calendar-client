@@ -8,16 +8,32 @@ import Week from '../../components/Home/Filter/Week';
 import Month from '../../components/Home/Filter/Month';
 import moment, { locale } from 'moment';
 import SwitchFilter from '../../components/Home/Filter/SwitchFilter';
+import useAxios from '../../hooks/useAxios';
+import { getDefaultFormatCodeSettings } from 'typescript';
+import { AxiosResponse } from 'axios';
+
+export interface Todo{ 
+    todo_id:number, 
+    user_id:number,
+    content:string, 
+    day:Date, 
+    tags:number[]
+    startingTime: number, 
+    endingTime: number, 
+}
 
 function Home() {
     const [authState, setAuthState] = useContext(AuthContext);
     const [filter, setFilter] = useState({ week: false, month:false, day:false});
-
+    const instance = useAxios();
     const [currentLayout ,setCurrentLayout] = useState<string>('');
-    
+    const [todos, setTodos] = useState<Todo[] | undefined>()
     const [currentDate, setCurrentDate] = useState<string>((new Date).getDate()  + " " + (new Date).toLocaleString('default', { month: 'long' }));
     const [selectedDate, setSelectedDate] = useState(new Date());
 
+    useEffect(() => { 
+        getTodos();
+    },[])
     
     const handleClickWeekSelectedDate = (selectedDate:string) => {
         setSelectedDate(new Date(selectedDate)); 
@@ -44,6 +60,12 @@ function Home() {
 
     console.log(authState);
 
+
+    const getTodos = () => { 
+        instance.get('./getTodo')
+        .then((res:AxiosResponse<any, Todo>) => setTodos(res.data))
+    }
+
     return (
         <div>
             <Background />
@@ -66,7 +88,7 @@ function Home() {
                     <div className="input-form input-form__signIn input-form__signIn--pseudo">
                         <div className="input-form__signIn--label">
                 <div className="home-label home-label--month" onClick={handleClickMonth}>
-                            Novembre
+                            {new Date(currentDate).getMonth()}
                         </div>
                         </div>
                     </div>
@@ -76,8 +98,8 @@ function Home() {
                     <div>
                         {filter.day && 
                         <>
-                        <SwitchFilter currentDate={currentDate} setFilter={setFilter} current={currentLayout} setCurrentLayout={setCurrentLayout} setSelectedDate={setSelectedDate}/>
-                        <Day selectedDate={selectedDate}/>
+                        <SwitchFilter  currentDate={currentDate} setFilter={setFilter} current={currentLayout} setCurrentLayout={setCurrentLayout} setSelectedDate={setSelectedDate}/>
+                        <Day todos={todos} selectedDate={selectedDate}/>
                         </>
         }
                     </div>

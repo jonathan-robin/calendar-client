@@ -5,7 +5,7 @@ import AddTags from './AddTags';
 import useAxios from '../hooks/useAxios';
 import { AuthContext } from '../context/GlobalState';
 
-function AddTodo(props:{setDisplayAddTodo:any, timeStartTodo:any}) {
+function AddTodo(props:{setDisplayAddTodo:any, timeStartTodo:any, date:Date}) {
     const [todoValue, setTodoValue] = useState('');
     const inputRef = useRef<HTMLInputElement>(null);
     const [displayAddTag, setDisplayAddTag] = useState(false);
@@ -14,6 +14,8 @@ function AddTodo(props:{setDisplayAddTodo:any, timeStartTodo:any}) {
     const [tags, setTags] = useState<any>(['']); 
     const instance = useAxios();
     const [authState, setAuthState] = useContext(AuthContext);
+    const [endingTime, setEndingTime] = useState<number | null>(null);
+    const [successAddTodo, setSuccessAddTodo] = useState(false);
 
 
     for (var i = 0; i < 24 - props.timeStartTodo; i++){
@@ -35,13 +37,23 @@ function AddTodo(props:{setDisplayAddTodo:any, timeStartTodo:any}) {
     }
 
     const HandleOnClickValider = (e:SyntheticEvent) => {
-        console.log(todoValue); 
-        console.log(startingTime); 
         let f = Array.from(document.getElementsByClassName('active'));
         let tags:number[] = [];
         f.map((ff, index) =>{ 
             tags.push(parseInt(ff.id)); 
         })
+        console.log(tags)
+        instance.post('/createTodo', {
+            content:todoValue, 
+            day:props.date, 
+            tags, 
+            startingTime:props.timeStartTodo, 
+            endingTime,
+        }).then(res => {res.status === 200 && setTimeout(() => {
+            setSuccessAddTodo(false);
+            props.setDisplayAddTodo(false);
+
+        },1500); setSuccessAddTodo(true)})
 
     }
 
@@ -53,10 +65,17 @@ function AddTodo(props:{setDisplayAddTodo:any, timeStartTodo:any}) {
         e.currentTarget.classList.toggle("active"); 
     }   
 
+    const handleOnChangeEndingTime = (event:any) => { 
+       setEndingTime(event.target[event.target.selectedIndex].getAttribute('data-value'))
+
+    }
+
     return (
         <>
         <div className='Modal__add-todo'>
             <div className="Modal__add-todo--inner">
+        {!successAddTodo? 
+        <>
                 <div className="todo__add-title stress">
                     Ajouter un todo
                     <div className="close-add-todo">
@@ -72,9 +91,9 @@ function AddTodo(props:{setDisplayAddTodo:any, timeStartTodo:any}) {
                 </div>
                 <div className="todo__add-time regular">
                     Ajouter une heure de fin
-                    <div><select>
+                    <div><select className='endingTime-todo' onChange={event => handleOnChangeEndingTime(event)}>
                         {remainingHours.map((hour, index) => {
-                            return <option>{hour}h00</option>
+                            return <option data-value={hour} value={hour}>{hour}h00</option>
                         })}
                     </select>
                     </div>
@@ -98,6 +117,12 @@ function AddTodo(props:{setDisplayAddTodo:any, timeStartTodo:any}) {
                     </button>
                 </div>
 
+</>
+:
+<div className='tagAdded stress'>
+Todo ajouté avec succès ! 
+</div>
+}
             </div>
 
         </div>

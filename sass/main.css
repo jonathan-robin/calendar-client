@@ -568,6 +568,10 @@
   padding-inline: 25px;
 }
 
+.tagAdded {
+  padding: 15px;
+}
+
 .todo__add-time {
   padding-inline: 25px;
   display: block;
