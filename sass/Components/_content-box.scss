@@ -53,3 +53,29 @@
         }
     }
 }
+.content-box__Switch{
+    position:absolute;
+    width:40%;
+    margin-left:auto;
+    margin-top:8vh;
+    left:28vw;
+    @include media ('<tablet'){
+        width:15%;
+        margin-top:9vh;
+        background:rgba(0,0,0,.4);
+        border-radius:12px;
+    }
+    .input-form.input-form__signIn.input-form__signIn--pseudo{
+        background:rgba(0,0,0,0.4);
+    }
+    @include media ('<smallTablet'){
+        left:0;
+        margin-top:1vh;
+        display:flex;
+        width:fit-content;
+        padding-inline:15px;
+    }
+}
+.input__month{ 
+    margin-top:-50vw;
+}

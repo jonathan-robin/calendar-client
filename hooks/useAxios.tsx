@@ -17,6 +17,8 @@ function useAxios() {
         baseURL:'http://localhost:5000/api/'
     });
 
+    instance.defaults.headers.common['authorization'] = `Bearer ${authState.token}`; 
+
     instance.interceptors.response.use((response) => {return response}, 
     async(error) => { 
         console.log(error);

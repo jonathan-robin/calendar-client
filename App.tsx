@@ -24,7 +24,7 @@ function App() {
   const [authState, setAuthState] = useContext(AuthContext)
 
   useEffect(() => {
-    setAuthState({token:'', refreshToken:'', username:'', id:0}); 
+    // setAuthState({token:'', refreshToken:'', username:'', id:0}); 
     console.log(authState)
   },[])
 

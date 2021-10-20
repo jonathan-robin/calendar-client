@@ -1,25 +1,45 @@
-import React, {useContext, useState} from 'react'; 
+import React, {useContext, useState, useEffect} from 'react'; 
 import Background from '../commons/background';
 import Shape from '../commons/Shape';
 import { AuthContext } from '../../context/GlobalState';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faCheckSquare, faTrashAlt, faEdit, faAd, faPlus} from '@fortawesome/free-solid-svg-icons'
 
+import Day from '../../components/Home/Filter/Day';
+import Week from '../../components/Home/Filter/Week';
+import Month from '../../components/Home/Filter/Month';
+import moment, { locale } from 'moment';
+import SwitchFilter from '../../components/Home/Filter/SwitchFilter';
 
 function Home() {
-    const [authState, setAuthState] = useContext(AuthContext)
-    const [filter, setFilter] = useState({ week: false, month:false, day:false})
-    let hours = Array.apply(null, Array(12)).map(function () {})
+    const [authState, setAuthState] = useContext(AuthContext);
+    const [filter, setFilter] = useState({ week: false, month:false, day:false});
+
+    const [currentLayout ,setCurrentLayout] = useState<string>('');
+    
+    const [currentDate, setCurrentDate] = useState<string>((new Date).getDate()  + " " + (new Date).toLocaleString('default', { month: 'long' }));
+    const [selectedDate, setSelectedDate] = useState(new Date());
+
+    
+    const handleClickWeekSelectedDate = (selectedDate:string) => {
+        setSelectedDate(new Date(selectedDate)); 
+        setFilter({week:false, month:false, day:true})
+    }
+
+    const handleClickMonthSelectedDate = (selectedDate:string) => {
+        setSelectedDate(new Date(selectedDate)); 
+        setFilter({week:false, month:false, day:true})
+    }
 
     const handleClickDay = () => { 
         setFilter({month:false, week:false, day:true})
+        setCurrentLayout("Day");
     }
     const handleClickWeek = () => {
         setFilter({month:false, week:true, day:false})
-
+        setCurrentLayout("Week");
     }
     const handleClickMonth = () => {
         setFilter({month:true, week:false, day:false})
+        setCurrentLayout("Month");
     }
 
     console.log(authState);
@@ -33,106 +53,51 @@ function Home() {
                 <div className="content-box__signIn">
             <div className="input-form input-form__signIn">
                 <div className="home-label home-label--day" onClick={handleClickDay}>
-                            Lundi 8 novembre
+                            {currentDate}
                 </div>
                 </div>
                     <div className="input-form input-form__signIn input-form__signIn--pseudo">
                         <div className="input-form__signIn--label">
-                <div className="home-label home-label--week" onClick={handleClickDay}>
+                <div className="home-label home-label--week" onClick={handleClickWeek}>
                             Semaine 44
                         </div>
                         </div>
                     </div>
                     <div className="input-form input-form__signIn input-form__signIn--pseudo">
                         <div className="input-form__signIn--label">
-                <div className="home-label home-label--month" onClick={handleClickDay}>
+                <div className="home-label home-label--month" onClick={handleClickMonth}>
                             Novembre
                         </div>
                         </div>
                     </div>
                     </div>
                     </div> : 
+                    <>
                     <div>
-                        {filter.day &&
-                        <div className='calendar__background'>
-                            <div className="inner-calendar">
-
-                            <div className="calendar-hour left">
-                                {hours.map((hour, index) => { 
-                                    let time:string;
-                                    if (index < 10 ) time = "0" + index.toString() + "h00";
-                                    else time = index.toString() + "h00"
-                                        return <>
-                                            <div className="calendar-todo">
-                                            <div className="calendar-time regular">
-                                                {time} 
-                                            <div className="calendar-todo--add">
-                                                    <FontAwesomeIcon icon={faPlus} />
-                                            </div>
-                                            </div>
-                                            <div className="todo">
-                                                <div className="todo-content">
-
-                                                </div>
-                                                <div className="todo-actions">
-                                                    <div className="calendar-todo--validate">
-                                                    <FontAwesomeIcon icon={faCheckSquare} />
-                                                    </div>
-                                                    <div className="calendar-todo--edit">
-                                                    <FontAwesomeIcon icon={faEdit} />
-                                                    </div>
-                                                    <div className="calendar-todo--delete">
-                                                    <FontAwesomeIcon icon={faTrashAlt} />
-                                                    </div>
-                                                </div>
-
-                                                </div>
-
-                                
-                                            </div></>
-                                })}
-                                </div> 
-                                <div className="calendar-hour right"> 
-                                {hours.map((hour, index) => { 
-                                    let time:string;
-                                    time = (12 + index).toString() + "h00";
-                                        return                            <>
-                                            <div className="calendar-todo">
-                                            <div className="calendar-time regular">
-                                                {time} 
-                                            <div className="calendar-todo--add">
-                                                    <FontAwesomeIcon icon={faPlus} />
-                                            </div>
-                                            </div>
-                                            <div className="todo">
-                                                <div className="todo-content">
-
-                                                </div>
-                                                <div className="todo-actions">
-                                                    <div className="calendar-todo--validate">
-                                                    <FontAwesomeIcon icon={faCheckSquare} />
-                                                    </div>
-                                                    <div className="calendar-todo--edit">
-                                                    <FontAwesomeIcon icon={faEdit} />
-                                                    </div>
-                                                    <div className="calendar-todo--delete">
-                                                    <FontAwesomeIcon icon={faTrashAlt} />
-                                                    </div>
-                                                </div>
-
-                                                </div>
-
-                                           
-
-                                            </div>
-                                            </>
-                                })}
-                                            </div>  
-
-                            </div>
-                        </div>
-                        }
+                        {filter.day && 
+                        <>
+                        <SwitchFilter currentDate={currentDate} setFilter={setFilter} current={currentLayout} setCurrentLayout={setCurrentLayout} setSelectedDate={setSelectedDate}/>
+                        <Day selectedDate={selectedDate}/>
+                        </>
+        }
                     </div>
+                    <div>
+                         {filter.week && 
+                         <>
+                        <SwitchFilter currentDate={currentDate} setFilter={setFilter} current={currentLayout} setCurrentLayout={setCurrentLayout} setSelectedDate={setSelectedDate}/>
+                         <Week handleClickWeekSelectedDate={handleClickWeekSelectedDate}/>
+                         </>
+                         }
+                     </div>
+                     <div>
+                         {filter.month && 
+                         <>
+                         <SwitchFilter currentDate={currentDate} setFilter={setFilter} current={currentLayout} setCurrentLayout={setCurrentLayout} setSelectedDate={setSelectedDate}/>
+                         <Month handleClickMonthSelectedDate={handleClickMonthSelectedDate}/>
+                        </>
+                         }
+                     </div>
+                    </>
                     }
         </div>
     )

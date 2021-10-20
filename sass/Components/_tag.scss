@@ -1,0 +1,20 @@
+.selectTag{
+    color:white; 
+    background:$pink;
+    width:fit-content;
+    display:flex;
+    padding:5px;
+    border-radius:10px;
+    cursor:pointer;
+    &:hover{
+        background-color:$green;
+    }
+}
+.active{ 
+    background-color:$green ;
+}
+
+.added_tags{
+    display:grid;
+    grid-template-columns: repeat(5, 1fr);
+}

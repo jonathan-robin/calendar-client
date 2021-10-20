@@ -26,14 +26,7 @@ async function LoadUserInfos(props:{instance:any, headers:any, history:any, auth
     // })
 
 
-    props.instance.get('/home')
-    .then((response:any) => {
-        props.authState({...props.authState, username:response.data.username, id: response.data.id })
-        return props.history.push('/home')
-    }).catch((err:any) => {
-        console.log(err.response.status)
-        return err.response.status
-    })
+
 }
 export default LoadUserInfos;
 

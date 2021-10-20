@@ -296,6 +296,45 @@
   }
 }
 
+.content-box__Switch {
+  position: absolute;
+  width: 40%;
+  margin-left: auto;
+  margin-top: 8vh;
+  left: 28vw;
+}
+
+@media (max-width: 1099px) {
+  .content-box__Switch {
+    width: 15%;
+    margin-top: 9vh;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 12px;
+  }
+}
+
+.content-box__Switch .input-form.input-form__signIn.input-form__signIn--pseudo {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+@media (max-width: 899px) {
+  .content-box__Switch {
+    left: 0;
+    margin-top: 1vh;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    padding-inline: 15px;
+  }
+}
+
+.input__month {
+  margin-top: -50vw;
+}
+
 .calendar__background {
   width: 40%;
   margin-left: auto;
@@ -382,6 +421,214 @@
 
 .inner-calendar .calendar-hour.right {
   width: 50%;
+}
+
+.calendar-week {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[3];
+      grid-template-columns: repeat(3, 1fr);
+}
+
+.calendar-week--day {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 2px;
+  border-radius: 5px;
+  width: 90%;
+  margin: 5px;
+}
+
+.calendar-week--day .calendar-todo {
+  display: block;
+}
+
+.switchWeek {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.switchWeek svg {
+  cursor: pointer;
+}
+
+.switchWeek svg :hover {
+  color: white;
+}
+
+.calendar-month {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (4fr)[4];
+      grid-template-columns: repeat(4, 4fr);
+  position: absolute;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  margin-top: 8vh;
+  padding: 10px;
+  margin-left: -10%;
+  min-width: 450px;
+}
+
+@media (max-width: 1099px) {
+  .calendar-month {
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 12px;
+  }
+}
+
+.calendar-month .regular {
+  color: #fff;
+  margin-bottom: 0.5em;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.Modal__add-todo {
+  z-index: 5;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.Modal__add-todo .buttons {
+  padding: 15px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+@media (max-width: 699px) {
+  .Modal__add-todo .buttons {
+    display: block;
+  }
+}
+
+@media (max-width: 699px) {
+  .Modal__add-todo .buttons .button-valid {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
+
+.Modal__add-todo input {
+  color: black;
+}
+
+.Modal__add-todo--tag {
+  z-index: 6;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.Modal__add-todo--tag .Modal__add-todo--inner {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.Modal__add-todo--inner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  -webkit-box-shadow: 5px 5px 20px black;
+          box-shadow: 5px 5px 20px black;
+  border-radius: 5px;
+}
+
+.todo__add-title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding-block: 25px;
+  padding-inline: 5px;
+}
+
+.close-add-todo {
+  margin-left: auto;
+  margin-right: 15px;
+  color: #F2C1F9;
+  cursor: pointer;
+}
+
+.close-add-todo :hover {
+  color: #FFC8C8;
+}
+
+.todo__add-content {
+  padding-inline: 25px;
+}
+
+.todo__add-time {
+  padding-inline: 25px;
+  display: block;
+  padding-block: 10px;
+}
+
+.todo__add-time select {
+  padding: 8px;
+  border-radius: 5px;
+  font-family: "Ubuntu";
+}
+
+.todo__add-tags {
+  padding-inline: 25px;
+  display: block;
+  padding-block: 10px;
+}
+
+.todo__add-tags select {
+  padding: 8px;
+  border-radius: 5px;
+  font-family: "Ubuntu";
+}
+
+.todo__add-tags svg {
+  float: right;
+  color: #F6FFC8;
+  cursor: pointer;
+}
+
+.todo__add-tags svg :hover {
+  color: #A9FECB;
+}
+
+.selectTag {
+  color: white;
+  background: #FFC8C8;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 5px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.selectTag:hover {
+  background-color: #A9FECB;
+}
+
+.active {
+  background-color: #A9FECB;
+}
+
+.added_tags {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[5];
+      grid-template-columns: repeat(5, 1fr);
 }
 
 .background-illustration {

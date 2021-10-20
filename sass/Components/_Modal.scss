@@ -1,0 +1,90 @@
+.Modal__add-todo{
+    z-index:5;
+    position:absolute;
+    top:0; 
+    left:0;
+    width:100vw; 
+    height:100vh;
+    background:rgba(0,0,0,.45);
+    .buttons{
+        padding:15px;
+        justify-content: center;
+        @include media('<bigPhone'){
+            display:block;
+        }
+        .button-valid{
+            @include media('<bigPhone'){
+                display:flex;
+            }
+        }
+    }
+    input{ 
+        color:black;
+    }
+}
+.Modal__add-todo--tag{
+    z-index:6;
+    background:rgba(0,0,0,.6);
+    .Modal__add-todo--inner{
+    background:rgba(255,255,255,.8);
+    }
+}
+.Modal__add-todo--inner{ 
+    position:absolute; 
+    top:50%; 
+    left:50%; 
+    background:rgba(255,255,255,.4);
+    transform:translate(-50%, -50%);
+    box-shadow:5px 5px 20px black;
+    border-radius:5px;
+    div{ 
+        // padding:25px;
+    }
+}
+.todo__add-title{ 
+    display:flex;
+    padding-block:25px;
+    padding-inline:5px;
+}
+.close-add-todo{
+    margin-left:auto;
+    margin-right:15px;
+    color:$purple;
+    cursor:pointer;
+    :hover{ 
+        color:$pink;
+    }
+}
+.todo__add-content{ 
+    padding-inline:25px;
+ 
+}
+.todo__add-time{ 
+    padding-inline:25px;
+    display:block;
+    padding-block:10px;
+    select{
+        padding:8px;
+        border-radius:5px; 
+        font-family:$text--font-family;
+    }
+}
+.todo__add-tags{ 
+    padding-inline:25px;
+    display:block;
+    padding-block:10px;
+    select{
+        padding:8px;
+        border-radius:5px; 
+        font-family:$text--font-family;
+    }
+    svg{
+        float:right;
+        color:$yellow;
+        cursor:pointer;
+        :hover{ 
+            color:$green;
+        }
+    }
+}
+
