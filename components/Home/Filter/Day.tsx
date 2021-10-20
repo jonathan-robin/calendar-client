@@ -1,11 +1,11 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faCheckSquare, faTrashAlt, faEdit, faAd, faPlus} from '@fortawesome/free-solid-svg-icons'
 import useAxios from '../../../hooks/useAxios';
 import AddTodo from '../../AddTodo';
 import { Todo } from '../../../pages/home/Home';
 
-function Day(props:{selectedDate:Date, todos:Todo[] | undefined}) {
+function Day(props:{selectedDate:Date, todos:Todo[] | undefined, getTodos:any}) {
     let hours = Array.apply(null, Array(12)).map(function () {})
     const instance = useAxios();
     const [displayAddTodo, setDisplayAddTodo] = useState(false);
@@ -13,14 +13,21 @@ function Day(props:{selectedDate:Date, todos:Todo[] | undefined}) {
     const [timeStartTodo, setTimeStartTodo] = useState();
     const [todoToDelete, setTodoToDelete] = useState<string>('');
     const [deletingTodo, setDeletingTodo] = useState(false);
+    const [todos, setTodos] = useState(props.todos);
+    const [todoSelectedDate, setTodoSelectedDate] = useState(props.todos && props.todos.filter((todo) => {
+            let tododay = new Date(todo.day);
+            return tododay.getMonth() === props.selectedDate.getMonth() && tododay.getDate() === props.selectedDate.getDate() && tododay.getFullYear() === props.selectedDate.getFullYear();
+        }));
+
 
     // On filtre les todos pour récupérer ceux du jour
-    let TodoSelectedDate = props.todos && props.todos.filter((todo) => {
-        let tododay = new Date(todo.day);
-        console.log(tododay)
-        return tododay.getMonth() === props.selectedDate.getMonth() && tododay.getDate() === props.selectedDate.getDate() && tododay.getFullYear() === props.selectedDate.getFullYear();
-    });
-    console.log(TodoSelectedDate,)
+    useEffect(() => {
+        console.log(todos)
+        setTodoSelectedDate(props.todos && props.todos.filter((todo) => {
+            let tododay = new Date(todo.day);
+            return tododay.getMonth() === props.selectedDate.getMonth() && tododay.getDate() === props.selectedDate.getDate() && tododay.getFullYear() === props.selectedDate.getFullYear();
+        }));
+    },[todos])
 
     const HandleOnClickAddTodo = (e:any) => {
         setTimeStartTodo(e.currentTarget.id);
@@ -33,23 +40,27 @@ function Day(props:{selectedDate:Date, todos:Todo[] | undefined}) {
         setDisplayDeleteMessage(true);
     }
 
-    const handleOnClickConfirmDelete = () => { 
-        instance.post('/deleteTodo',{
+    const handleOnClickConfirmDelete = async () => { 
+        await instance.post('/deleteTodo',{
             todo_id:parseInt(todoToDelete),
         })
-        .then((res) => {
+        .then(async(res) => {
             if (res.status === 200){
                 setTimeout(() => { 
                     setDeletingTodo(false)
                     setDisplayDeleteMessage(false)
                 },1500)
-            setDeletingTodo(true)
-            }});
-    }
+                setDeletingTodo(true);
+                let p = await props.getTodos();
+                return p;
+        }})
+        .then((res) => {return setTodos(res)})
+        }
 
     const HandleOnClickCancelDelete = () => { 
         setDisplayDeleteMessage(false);  
         setTodoToDelete('');
+
     }
 
     return (
@@ -77,7 +88,7 @@ function Day(props:{selectedDate:Date, todos:Todo[] | undefined}) {
                         </div>
                         <div className="todo">
                             <div className="todo-content">
-                            {TodoSelectedDate && TodoSelectedDate.map((todo, i) => { 
+                            {todoSelectedDate && todoSelectedDate.map((todo, i) => { 
                                 if(todo.startingTime.toString() === index.toString()){ 
                                     todo_id = todo.todo_id;
                                     return <div>{todo.content}</div>
@@ -119,8 +130,7 @@ function Day(props:{selectedDate:Date, todos:Todo[] | undefined}) {
                         </div>
                         <div className="todo">
                             <div className="todo-content">
-                            {TodoSelectedDate && TodoSelectedDate.map((todo, i) => { 
-                                console.log(todo.startingTime, " " ,id)
+                            {todoSelectedDate && todoSelectedDate.map((todo, i) => { 
                                 if(todo.startingTime.toString() === id.toString()){ 
                                     todo_id = todo.todo_id;
                                     return <div>{todo.content}</div>

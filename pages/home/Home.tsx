@@ -61,9 +61,10 @@ function Home() {
     console.log(authState);
 
 
-    const getTodos = () => { 
-        instance.get('./getTodo')
-        .then((res:AxiosResponse<any, Todo>) => setTodos(res.data))
+    const getTodos = async() => { 
+        let p = await instance.get('./getTodo')
+        .then((res:AxiosResponse<any, Todo>) =>  {setTodos(res.data); return res})
+        return p;
     }
 
     return (
@@ -99,7 +100,7 @@ function Home() {
                         {filter.day && 
                         <>
                         <SwitchFilter  currentDate={currentDate} setFilter={setFilter} current={currentLayout} setCurrentLayout={setCurrentLayout} setSelectedDate={setSelectedDate}/>
-                        <Day todos={todos} selectedDate={selectedDate}/>
+                        <Day todos={todos} selectedDate={selectedDate} getTodos={getTodos} />
                         </>
         }
                     </div>
