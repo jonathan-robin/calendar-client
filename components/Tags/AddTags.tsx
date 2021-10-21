@@ -1,7 +1,7 @@
 import React, {useEffect, useState, useRef} from 'react'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faCheckSquare, faTrashAlt, faEdit, faAd, faPlus, faWindowClose} from '@fortawesome/free-solid-svg-icons'
-import useAxios from '../hooks/useAxios';
+import useAxios from '../../hooks/useAxios';
 
 function AddTags(props:{setDisplayAddTag:any}) {
     const inputRef = useRef<HTMLInputElement>(null);

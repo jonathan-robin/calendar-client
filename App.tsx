@@ -20,14 +20,7 @@ export interface ServerResponseToken{
 
 
 function App() {
-  // const instance = useAxios(); 
   const [authState, setAuthState] = useContext(AuthContext)
-
-  useEffect(() => {
-    // setAuthState({token:'', refreshToken:'', username:'', id:0}); 
-    console.log(authState)
-  },[])
-
 
   return (
     <AuthProvider>

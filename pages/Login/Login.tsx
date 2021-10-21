@@ -5,7 +5,6 @@ import Shape from '../commons/Shape';
 import useAxios from '../../hooks/useAxios';
 import { AxiosResponse } from 'axios';
 import { AuthContext } from '../../context/GlobalState';
-import LoadUserInfos from '../../components/utils/LoadUserInfos';
 
 function Login() {
     const history = useHistory(); 

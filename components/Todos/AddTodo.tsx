@@ -1,17 +1,17 @@
 import React,{useState, SyntheticEvent, useRef, useEffect, InputHTMLAttributes, ChangeEventHandler, ButtonHTMLAttributes, useContext} from 'react'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faCheckSquare, faTrashAlt, faEdit, faAd, faPlus, faWindowClose} from '@fortawesome/free-solid-svg-icons'; 
-import AddTags from './AddTags';
-import useAxios from '../hooks/useAxios';
-import { AuthContext } from '../context/GlobalState';
+import AddTags from '../Tags/AddTags';
+import useAxios from '../../hooks/useAxios';
+import { AuthContext } from '../../context/GlobalState';
 
-function AddTodo(props:{setDisplayAddTodo:any, timeStartTodo:any, date:Date}) {
+function AddTodo(props:{setDisplayAddTodo:any, timeStartTodo:any, date:Date, getTodos:any}) {
     const [todoValue, setTodoValue] = useState('');
     const inputRef = useRef<HTMLInputElement>(null);
     const [displayAddTag, setDisplayAddTag] = useState(false);
     const [startingTime, setStartingTime] = useState<string | null>(null);
     var remainingHours:number[] = [];
-    const [tags, setTags] = useState<any>(['']); 
+    const [tags, setTags] = useState<any>(); 
     const instance = useAxios();
     const [authState, setAuthState] = useContext(AuthContext);
     const [endingTime, setEndingTime] = useState<number | null>(null);
@@ -36,14 +36,14 @@ function AddTodo(props:{setDisplayAddTodo:any, timeStartTodo:any, date:Date}) {
         setTodoValue(event.currentTarget.value);
     }
 
-    const HandleOnClickValider = (e:SyntheticEvent) => {
+    const HandleOnClickValider = async (e:SyntheticEvent) => {
         let f = Array.from(document.getElementsByClassName('active'));
         let tags:number[] = [];
         f.map((ff, index) =>{ 
             tags.push(parseInt(ff.id)); 
         })
         console.log(tags)
-        instance.post('/createTodo', {
+        await instance.post('/createTodo', {
             content:todoValue, 
             day:props.date, 
             tags, 
@@ -51,9 +51,12 @@ function AddTodo(props:{setDisplayAddTodo:any, timeStartTodo:any, date:Date}) {
             endingTime,
         }).then(res => {res.status === 200 && setTimeout(() => {
             setSuccessAddTodo(false);
-            props.setDisplayAddTodo(false);
-
+            
         },1500); setSuccessAddTodo(true)})
+        .then(async(res) => {
+            let p = await props.getTodos();
+            return props.setDisplayAddTodo(false);
+        })
 
     }
 

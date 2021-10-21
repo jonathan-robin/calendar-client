@@ -2,12 +2,11 @@ import React, {useContext, useState, useEffect} from 'react';
 import Background from '../commons/background';
 import Shape from '../commons/Shape';
 import { AuthContext } from '../../context/GlobalState';
-
-import Day from '../../components/Home/Filter/Day';
-import Week from '../../components/Home/Filter/Week';
-import Month from '../../components/Home/Filter/Month';
+import Day from '../../components/Home/Day';
+import Week from '../../components/Home/Week';
+import Month from '../../components/Home/Month';
 import moment, { locale } from 'moment';
-import SwitchFilter from '../../components/Home/Filter/SwitchFilter';
+import SwitchFilter from '../../components/Home/SwitchFilter';
 import useAxios from '../../hooks/useAxios';
 import { getDefaultFormatCodeSettings } from 'typescript';
 import { AxiosResponse } from 'axios';
@@ -17,9 +16,10 @@ export interface Todo{
     user_id:number,
     content:string, 
     day:Date, 
-    tags:number[]
+    tags:number[],
     startingTime: number, 
     endingTime: number, 
+    archived:boolean
 }
 
 function Home() {
@@ -62,8 +62,13 @@ function Home() {
 
 
     const getTodos = async() => { 
-        let p = await instance.get('./getTodo')
-        .then((res:AxiosResponse<any, Todo>) =>  {setTodos(res.data); return res})
+        let p = await instance.get('./getTodos')
+        .then((res:AxiosResponse<any, Todo>) =>  
+        // {if (res && res.status === 200)
+            {
+            setTodos(res.data); return res
+        // }
+        })
         return p;
     }
 
@@ -108,7 +113,7 @@ function Home() {
                          {filter.week && 
                          <>
                         <SwitchFilter currentDate={currentDate} setFilter={setFilter} current={currentLayout} setCurrentLayout={setCurrentLayout} setSelectedDate={setSelectedDate}/>
-                         <Week handleClickWeekSelectedDate={handleClickWeekSelectedDate}/>
+                         <Week handleClickWeekSelectedDate={handleClickWeekSelectedDate} todos={todos} getTodos={getTodos}/>
                          </>
                          }
                      </div>
@@ -116,7 +121,7 @@ function Home() {
                          {filter.month && 
                          <>
                          <SwitchFilter currentDate={currentDate} setFilter={setFilter} current={currentLayout} setCurrentLayout={setCurrentLayout} setSelectedDate={setSelectedDate}/>
-                         <Month handleClickMonthSelectedDate={handleClickMonthSelectedDate}/>
+                         <Month handleClickMonthSelectedDate={handleClickMonthSelectedDate} todos={todos} getTodos={getTodos}/>
                         </>
                          }
                      </div>

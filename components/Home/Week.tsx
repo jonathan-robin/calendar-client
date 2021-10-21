@@ -1,11 +1,16 @@
 import React,{useEffect, useState} from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faCheckSquare, faTrashAlt, faEdit, faAd, faPlus, faArrowRight, faArrowLeft} from '@fortawesome/free-solid-svg-icons'
+import {faPlus, faArrowRight, faArrowLeft} from '@fortawesome/free-solid-svg-icons'
+import { Todo } from '../../pages/home/Home';
+import useAxios from '../../hooks/useAxios';
+import { AxiosResponse } from 'axios';
 
-function Week(props:{handleClickWeekSelectedDate:any}) {
+function Week(props:{handleClickWeekSelectedDate:any,  todos:Todo[] | undefined, getTodos:any}) {
     const [prevMonday, setPrevMonday] = useState<Date>(new Date());
-    let monday = prevMonday.setDate(prevMonday.getDate() - (prevMonday.getDay() + 6) % 7)
+    let monday = prevMonday.setDate(prevMonday.getDate() - (prevMonday.getDay() + 6) % 7);
     var fullWeek:Date[] = [];
+    const instance = useAxios();
+    const [todos, setTodos] = useState<Todo[] | undefined>(props.todos);
 
     const getFullWeek = (monday:any) => {
         fullWeek = [];
@@ -29,7 +34,6 @@ function Week(props:{handleClickWeekSelectedDate:any}) {
     }
 
 
-
     return (
         <div className='calendar__background'>
             <div className="switchWeek">
@@ -50,28 +54,17 @@ function Week(props:{handleClickWeekSelectedDate:any}) {
                                             <FontAwesomeIcon icon={faPlus} />
                                     </div>
 
-                                    {/* mapper les todos  */}
                                     <div className="todo">
                                         <div className="todo-content">
-
+                                            {todos && todos.map((todo, index) => { 
+                                                let nd = new Date(todo.day)
+                                                if (nd.getMonth() === day.getMonth() && nd.getDate() === day.getDate() && nd.getFullYear() === day.getFullYear()){ 
+                                                    return todo.content;
+                                                }
+                                            })}
                                         </div>
-                                        {/* <div className="todo-actions">
-                                            <div className="calendar-todo--validate">
-                                            <FontAwesomeIcon icon={faCheckSquare} />
-                                            </div>
-                                            <div className="calendar-todo--edit">
-                                            <FontAwesomeIcon icon={faEdit} />
-                                            </div>
-                                            <div className="calendar-todo--delete">
-                                            <FontAwesomeIcon icon={faTrashAlt} />
-                                            </div>
-                                        </div> */}
-
                                         </div>
-
-            
                         </div>
-
                             </div>
                         })}
                 </div> 

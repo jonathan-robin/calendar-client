@@ -1,17 +1,21 @@
-import React,{useState, useEffect} from 'react';
+import React,{useState, useEffect, SyntheticEvent} from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faCheckSquare, faTrashAlt, faEdit, faAd, faPlus} from '@fortawesome/free-solid-svg-icons'
-import useAxios from '../../../hooks/useAxios';
-import AddTodo from '../../AddTodo';
-import { Todo } from '../../../pages/home/Home';
+import useAxios from '../../hooks/useAxios';
+import AddTodo from '../Todos/AddTodo';
+import { Todo } from '../../pages/home/Home';
+import EditTodo from'../Todos/EditTodo';
+import { AxiosResponse } from 'axios';
 
 function Day(props:{selectedDate:Date, todos:Todo[] | undefined, getTodos:any}) {
     let hours = Array.apply(null, Array(12)).map(function () {})
     const instance = useAxios();
     const [displayAddTodo, setDisplayAddTodo] = useState(false);
+    const [displayEditTodo, setDisplayEditTodo] = useState(false);
     const [displayDeleteMessage, setDisplayDeleteMessage] = useState(false);
     const [timeStartTodo, setTimeStartTodo] = useState();
     const [todoToDelete, setTodoToDelete] = useState<string>('');
+    const [todoToEdit, setTodoToEdit] = useState<Todo[]>();
     const [deletingTodo, setDeletingTodo] = useState(false);
     const [todos, setTodos] = useState(props.todos);
     const [todoSelectedDate, setTodoSelectedDate] = useState(props.todos && props.todos.filter((todo) => {
@@ -28,6 +32,11 @@ function Day(props:{selectedDate:Date, todos:Todo[] | undefined, getTodos:any}) 
             return tododay.getMonth() === props.selectedDate.getMonth() && tododay.getDate() === props.selectedDate.getDate() && tododay.getFullYear() === props.selectedDate.getFullYear();
         }));
     },[todos])
+
+    useEffect(() => { 
+        props.getTodos();
+        setTodos(props.getTodos())
+    },[displayAddTodo, displayEditTodo])
 
     const HandleOnClickAddTodo = (e:any) => {
         setTimeStartTodo(e.currentTarget.id);
@@ -60,12 +69,24 @@ function Day(props:{selectedDate:Date, todos:Todo[] | undefined, getTodos:any}) 
     const HandleOnClickCancelDelete = () => { 
         setDisplayDeleteMessage(false);  
         setTodoToDelete('');
+    }
 
+    const handleOnClickEditTodo = async (e:SyntheticEvent) => {
+        await instance.post('/getTodo',{
+            todo_id:parseInt(e.currentTarget.id),
+        })
+        .then(async(res:AxiosResponse<any, Todo[]>) => {
+            if (res.status === 200){
+                setTodoToEdit(res.data)
+        }})
+        .then((res) => setDisplayEditTodo(true))
+        // console.log(e.currentTarget.id);
     }
 
     return (
       <>
-     {displayAddTodo && <AddTodo timeStartTodo={timeStartTodo} setDisplayAddTodo={setDisplayAddTodo} date={props.selectedDate}/>}
+     {displayAddTodo && <AddTodo timeStartTodo={timeStartTodo} setDisplayAddTodo={setDisplayAddTodo} date={props.selectedDate} getTodos={() => props.getTodos()}/>}
+     {displayEditTodo && todoToEdit && <EditTodo todo={todoToEdit} setDisplayEditTodo={setDisplayEditTodo} getTodos={() => props.getTodos()}/>}
         <div className='calendar__background stress'>
                         {props.selectedDate.toLocaleDateString('fr-FR', 
                                     {weekday: "long", month: "long", day: "numeric"})}
@@ -101,7 +122,7 @@ function Day(props:{selectedDate:Date, todos:Todo[] | undefined, getTodos:any}) 
                                 <FontAwesomeIcon icon={faCheckSquare} />
                                 </div>
                                 <div className="calendar-todo--edit">
-                                <FontAwesomeIcon icon={faEdit} />
+                                <FontAwesomeIcon icon={faEdit} id={todo_id.toString()} onClick={handleOnClickEditTodo}/>
                                 </div>
                                 <div className="calendar-todo--delete">
                                 <FontAwesomeIcon icon={faTrashAlt} id={todo_id.toString()} onClick={handleOnClickDeleteTodo}/>
@@ -143,7 +164,7 @@ function Day(props:{selectedDate:Date, todos:Todo[] | undefined, getTodos:any}) 
                                 <FontAwesomeIcon icon={faCheckSquare} />
                                 </div>
                                 <div className="calendar-todo--edit">
-                                <FontAwesomeIcon icon={faEdit} />
+                                <FontAwesomeIcon icon={faEdit} id={todo_id.toString()} onClick={handleOnClickEditTodo} />
                                 </div>
                                 <div className="calendar-todo--delete">
                                 <FontAwesomeIcon icon={faTrashAlt} id={todo_id.toString()} onClick={handleOnClickDeleteTodo}/>

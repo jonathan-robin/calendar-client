@@ -1,12 +1,13 @@
 import React,{useEffect, useState} from 'react'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faCheckSquare, faTrashAlt, faEdit, faAd, faPlus, faArrowRight, faArrowLeft} from '@fortawesome/free-solid-svg-icons'
+import { Todo } from '../../pages/home/Home';
 
-function Month(props:{handleClickMonthSelectedDate:any}) {
+function Month(props:{handleClickMonthSelectedDate:any, todos:Todo[] | undefined, getTodos:any}) {
 
+    const [todos, setTodos] = useState<Todo[] | undefined>(props.todos)
     const [month, setMonth] = useState<number>(new Date().getMonth());
     let date = new Date;
-    let firstDayOfTheMonth = new Date(date.getFullYear(), date.getMonth(), 1);
     var fullMonth:Date[] = [];
 
     const getFullMonth = (firstDayOfTheMonth:any) => {
@@ -65,28 +66,17 @@ function Month(props:{handleClickMonthSelectedDate:any}) {
                                             <FontAwesomeIcon icon={faPlus} />
                                     </div>
 
-                                    {/* mapper les todos  */}
                                     <div className="todo">
                                         <div className="todo-content">
-
+                                            {todos?.map((todo, index) =>{
+                                                let nd = new Date(todo.day) 
+                                                if (day.getMonth() === nd.getMonth() && day.getFullYear() === nd.getFullYear() && day.getDate() === nd.getDate()){
+                                                    return todo.content
+                                                }
+                                            })}
                                         </div>
-                                        {/* <div className="todo-actions">
-                                            <div className="calendar-todo--validate">
-                                            <FontAwesomeIcon icon={faCheckSquare} />
-                                            </div>
-                                            <div className="calendar-todo--edit">
-                                            <FontAwesomeIcon icon={faEdit} />
-                                            </div>
-                                            <div className="calendar-todo--delete">
-                                            <FontAwesomeIcon icon={faTrashAlt} />
-                                            </div>
-                                        </div> */}
-
                                         </div>
-
-            
                         </div>
-
                             </div>
                         })}
                 </div> 
