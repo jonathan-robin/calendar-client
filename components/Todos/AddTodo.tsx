@@ -42,7 +42,6 @@ function AddTodo(props:{setDisplayAddTodo:any, timeStartTodo:any, date:Date, get
         f.map((ff, index) =>{ 
             tags.push(parseInt(ff.id)); 
         })
-        console.log(tags)
         await instance.post('/createTodo', {
             content:todoValue, 
             day:props.date, 

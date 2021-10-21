@@ -20,8 +20,6 @@ function SwitchFilter(props:{current:string, setFilter:any, currentDate:string, 
         props.setCurrentLayout('Month');
     }
 
-    console.log(props.current)
-
     return (
         <div className="content-box">
             <div className="content-box__Switch">

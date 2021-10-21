@@ -24,9 +24,7 @@ function Day(props:{selectedDate:Date, todos:Todo[] | undefined, getTodos:any}) 
         }));
 
 
-    // On filtre les todos pour récupérer ceux du jour
     useEffect(() => {
-        console.log(todos)
         setTodoSelectedDate(props.todos && props.todos.filter((todo) => {
             let tododay = new Date(todo.day);
             return tododay.getMonth() === props.selectedDate.getMonth() && tododay.getDate() === props.selectedDate.getDate() && tododay.getFullYear() === props.selectedDate.getFullYear();
@@ -80,7 +78,6 @@ function Day(props:{selectedDate:Date, todos:Todo[] | undefined, getTodos:any}) 
                 setTodoToEdit(res.data)
         }})
         .then((res) => setDisplayEditTodo(true))
-        // console.log(e.currentTarget.id);
     }
 
     return (

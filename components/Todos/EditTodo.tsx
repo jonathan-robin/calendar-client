@@ -26,6 +26,8 @@ function EditTodo(props:{todo:Todo[], setDisplayEditTodo:any, getTodos:any}) {
     const [displayAddTag, setDisplayAddTag] = useState(false);
     const [successEditTodo, setSuccessEditTodo] = useState(false);
 
+    const [formattedEndingTime, setFormattedEndingTime] = useState<string>();
+
     for (var i = 0; i < 24 - props.todo[0].startingTime; i++){
         remainingHours.push(parseInt(props.todo[0].startingTime.toString().split('h')[0]) + i + 1)
     }
@@ -38,6 +40,7 @@ function EditTodo(props:{todo:Todo[], setDisplayEditTodo:any, getTodos:any}) {
     useEffect(() => {
         inputRef.current && inputRef.current.focus();
         props.todo[0].startingTime > 12 ? setStartingTime(props.todo[0].startingTime.toString() + "h00") : setStartingTime("0"+props.todo[0].startingTime.toString()+"h00");
+        props.todo[0].endingTime > 12 ? setFormattedEndingTime(props.todo[0].endingTime.toString() + "h00") : setFormattedEndingTime("0"+props.todo[0].endingTime.toString()+"h00");
     },[])
 
     const handleOnChangeInputValue = (event:React.FormEvent<HTMLInputElement>) => { 
@@ -50,14 +53,9 @@ function EditTodo(props:{todo:Todo[], setDisplayEditTodo:any, getTodos:any}) {
         .then((res) => setTags(res.data))
         .then((res) => {
             let allTag = Array.from(document.querySelectorAll('div.tag-inactive'));
-            console.log(todoTags)
-
             let i:number[] = [...todoTags];
-            console.log(i)
-            // .filter((todo) => { return todo != ','})
             i.forEach((todoTagId:number, index:number) =>{
             allTag.map((tagX,index) =>{ 
-                    console.log(todoTagId)
                     if (tagX.id === todoTagId.toString()){
                         allTag[index].classList.toggle('active');
                     }
@@ -83,7 +81,7 @@ function EditTodo(props:{todo:Todo[], setDisplayEditTodo:any, getTodos:any}) {
                 day:props.todo[0].day, 
                 tags, 
                 startingTime:props.todo[0].startingTime, 
-                endingTime:endingTime,
+                endingTime,
             }).then(res => {res.status === 200 && setTimeout(() => {
                 setSuccessEditTodo(false);
                 props.setDisplayEditTodo(false);
@@ -128,7 +126,7 @@ function EditTodo(props:{todo:Todo[], setDisplayEditTodo:any, getTodos:any}) {
                 Heure de début : {startingTime}
                 </div>
                 <div className="todo__add-time regular">
-                    Ajouter une heure de fin
+                    Heure de fin : {formattedEndingTime}
                     <div><select className='endingTime-todo' onChange={event => handleOnChangeEndingTime(event)}>
                         {remainingHours.map((hour, index) => {
                             return <option data-value={hour} value={hour}>{hour}h00</option>
@@ -158,7 +156,7 @@ function EditTodo(props:{todo:Todo[], setDisplayEditTodo:any, getTodos:any}) {
 </>
 :
             <div className='tagAdded stress'>
-            Todo modifié avec ssu
+            Todo modifié avec succès ! 
             </div>
 }
             </div>
