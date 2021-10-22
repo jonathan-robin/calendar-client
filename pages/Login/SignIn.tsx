@@ -13,6 +13,7 @@ function SignIn() {
   const [passCheckValue, setPassCheckValue] = useState<string>('');
   const instance = useAxios();
   const [authState, setAuthState] = useContext(AuthContext);
+  const [errorMessage, setErrorMessage] = useState<string | null >(null);
 
   useEffect(() => {
     const destroy: any = document.querySelectorAll(".input-form__signIn");
@@ -33,10 +34,10 @@ function SignIn() {
   const handleClickCreateAccount = (e: any) => {
     e.preventDefault();
     if (passValue !== passCheckValue) {
-      return "Pass doesn't match";
+      return setErrorMessage("Les mots de passe ne correspondent pas...");
     }
     else if (usernameValue === '' || passValue === ''){
-        return 'Enter valid username or password'
+        return setErrorMessage("Entrez un nom d'utilisateur et un mot de passe valide...")
     }
     else{
         return instance
@@ -105,6 +106,11 @@ function SignIn() {
           <div className="regular">
             L'application qui vous permet de garder un oeil sur vos todos !
           </div>
+          {errorMessage && 
+          <div className="regular-error">
+            {errorMessage}
+          </div>
+        }
 
           <div className="input-form input-form__signIn input-form__signIn--pseudo">
             <div className="input-form__signIn--label">Nom d'utilisateur</div>

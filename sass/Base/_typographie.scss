@@ -14,6 +14,11 @@
     font-size:$text--font-size; 
     font-family: $text--font-family;
 }
+.regular-error{
+    font-size:$text--font-size; 
+    font-family: $text--font-family;
+    color:$pink;
+}
 .content-box__signIn .subTitle, .content-box__login .subTitle{
     color:white; 
     margin-left:0.5vw;

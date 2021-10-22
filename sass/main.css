@@ -38,6 +38,12 @@
   font-family: "Ubuntu";
 }
 
+.regular-error {
+  font-size: clamp(0.9rem, 1.5vw, 1.3rem);
+  font-family: "Ubuntu";
+  color: #FFC8C8;
+}
+
 .content-box__signIn .subTitle, .content-box__login .subTitle {
   color: white;
   margin-left: 0.5vw;
@@ -893,6 +899,16 @@ body {
   display: flex !important;
   -ms-flex-pack: distribute;
       justify-content: space-around;
+}
+
+.regular-error {
+  background-color: rgba(241, 119, 119, 0.5);
+  padding: 15px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-inline: auto;
+  border-radius: 15px;
 }
 
 body {

@@ -2,3 +2,11 @@
     display:flex !important; 
     justify-content: space-around;
 }
+
+.regular-error{ 
+    background-color:rgba(241, 119, 119, 0.5);
+    padding:15px; 
+    width:fit-content;
+    margin-inline:auto;
+    border-radius:15px;
+}

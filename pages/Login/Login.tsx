@@ -10,6 +10,7 @@ function Login() {
   const [inputPassValue, setInputPassValue] = useState<string>();
   const instance = useAxios();
   const [authState, setAuthState] = useContext(AuthContext);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
   const handleClickSignIn = () => {
     history.push("/SignIn");
@@ -39,9 +40,10 @@ function Login() {
           if (p.status === 200) {
             return history.push("/home");
           }
-          return false;
+          return setErrorMessage('Problème interne au serveur...');
         }
-        return false;
+        return setErrorMessage("Le mot de ou passe ou l'identifiant n'est pas valide");
+
       });
   };
   const handleOnChangeInputUsername = (
@@ -69,6 +71,11 @@ function Login() {
           <div className="regular">
             Welcome back ! Que fait-on aujourd'hui ?
           </div>
+          {errorMessage && 
+          <div className="regular-error">
+              {errorMessage}
+          </div>
+        }
           <div className="inline ">
             <div className="input-form input-form__signIn input-form__signIn--pseudo">
               <div className="input-form__signIn--label">Nom d'utilisateur</div>
