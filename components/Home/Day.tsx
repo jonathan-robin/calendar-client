@@ -4,7 +4,7 @@ import {faCheckSquare, faTrashAlt, faEdit, faAd, faPlus} from '@fortawesome/free
 import useAxios from '../../hooks/useAxios';
 import AddTodo from '../Todos/AddTodo';
 import { Todo } from '../../pages/home/Home';
-import EditTodo from'../Todos/EditTodo';
+import EditTodo, { tags } from'../Todos/EditTodo';
 import { AxiosResponse } from 'axios';
 
 function Day(props:{selectedDate:Date, todos:Todo[] | undefined, getTodos:any}) {
@@ -18,10 +18,17 @@ function Day(props:{selectedDate:Date, todos:Todo[] | undefined, getTodos:any}) 
     const [todoToEdit, setTodoToEdit] = useState<Todo[]>();
     const [deletingTodo, setDeletingTodo] = useState(false);
     const [todos, setTodos] = useState(props.todos);
+    const [tags, setTags ] = useState<any>();
     const [todoSelectedDate, setTodoSelectedDate] = useState(props.todos && props.todos.filter((todo) => {
             let tododay = new Date(todo.day);
             return tododay.getMonth() === props.selectedDate.getMonth() && tododay.getDate() === props.selectedDate.getDate() && tododay.getFullYear() === props.selectedDate.getFullYear();
         }));
+
+
+        useEffect(() => { 
+            instance.post('/tags')
+            .then((res) => setTags(res.data))
+        },[])
 
 
     useEffect(() => {
@@ -85,8 +92,10 @@ function Day(props:{selectedDate:Date, todos:Todo[] | undefined, getTodos:any}) 
      {displayAddTodo && <AddTodo timeStartTodo={timeStartTodo} setDisplayAddTodo={setDisplayAddTodo} date={props.selectedDate} getTodos={() => props.getTodos()}/>}
      {displayEditTodo && todoToEdit && <EditTodo todo={todoToEdit} setDisplayEditTodo={setDisplayEditTodo} getTodos={() => props.getTodos()}/>}
         <div className='calendar__background stress'>
+            <div className="selected-date">
                         {props.selectedDate.toLocaleDateString('fr-FR', 
                                     {weekday: "long", month: "long", day: "numeric"})}
+                                    </div>
         <div className="inner-calendar">
 
         <div className="calendar-hour left">
@@ -105,16 +114,25 @@ function Day(props:{selectedDate:Date, todos:Todo[] | undefined, getTodos:any}) 
                         </div>
                         </div>
                         <div className="todo">
-                            <div className="todo-content">
+                            <div>
                             {todoSelectedDate && todoSelectedDate.map((todo, i) => { 
                                 if(todo.startingTime.toString() === index.toString()){ 
                                     todo_id = todo.todo_id;
-                                    return <div>{todo.content}</div>
-                                }
-                        })
-                        }
-                            </div>
-                            <div className="todo-actions">
+                                    let todosTags:string[] = [];
+                                    tags && tags.map((tag:tags, index:number) => { 
+                                        let i:number[] = [...todo.tags];
+                                        i.forEach((todoTagId:number, index:number) =>{
+                                        if (tag.id.toString() === todoTagId.toString()){
+                                            todosTags.push(tag.name);
+                                        }
+                                    })
+                                    })
+                                    return (<div className='todo-content'>
+                                    <div className='todo-content--text'>{todo.content}</div>
+                                    {todosTags && todosTags.map((todoTag:string, index:number)=>{ 
+                                        return <small className='todo-content--tags'>{"#"+todoTag + " "}</small>
+                                    })}
+                                        <div className="todo-actions">
                                 <div className="calendar-todo--validate">
                                 <FontAwesomeIcon icon={faCheckSquare} />
                                 </div>
@@ -125,6 +143,14 @@ function Day(props:{selectedDate:Date, todos:Todo[] | undefined, getTodos:any}) 
                                 <FontAwesomeIcon icon={faTrashAlt} id={todo_id.toString()} onClick={handleOnClickDeleteTodo}/>
                                 </div>
                             </div>
+                                    </div>
+                                    )
+                                    
+                                }
+                        })
+                    }
+                        </div>
+
 
                             </div>
 
@@ -147,34 +173,50 @@ function Day(props:{selectedDate:Date, todos:Todo[] | undefined, getTodos:any}) 
                         </div>
                         </div>
                         <div className="todo">
-                            <div className="todo-content">
+                            <div>
                             {todoSelectedDate && todoSelectedDate.map((todo, i) => { 
                                 if(todo.startingTime.toString() === id.toString()){ 
                                     todo_id = todo.todo_id;
-                                    return <div>{todo.content}</div>
+                                    let todosTags:string[] = [];
+                                    tags && tags.map((tag:tags, index:number) => { 
+                                        let i:number[] = [...todo.tags];
+                                        i.forEach((todoTagId:number, index:number) =>{
+                                        if (tag.id.toString() === todoTagId.toString()){
+                                            todosTags.push(tag.name);
+                                        }
+                                    })
+                                    })
+                                    return (<div className='todo-content'>
+                                    <div className='todo-content--text'>{todo.content}</div>
+                                    {todosTags && todosTags.map((todoTag:string, index:number)=>{ 
+                                    return <small className='todo-content--tags'>{"#"+todoTag + " "}</small>
+                                    })}
+
+
+<div className="todo-actions">
+    <div className="calendar-todo--validate">
+    <FontAwesomeIcon icon={faCheckSquare} />
+    </div>
+    <div className="calendar-todo--edit">
+    <FontAwesomeIcon icon={faEdit} id={todo_id.toString()} onClick={handleOnClickEditTodo}/>
+    </div>
+    <div className="calendar-todo--delete">
+    <FontAwesomeIcon icon={faTrashAlt} id={todo_id.toString()} onClick={handleOnClickDeleteTodo}/>
+    </div>
+</div>
+
+                                    </div>
+                                    )
                                 }
                         })
                         }
-                            </div>
-                            <div className="todo-actions">
-                                <div className="calendar-todo--validate">
-                                <FontAwesomeIcon icon={faCheckSquare} />
-                                </div>
-                                <div className="calendar-todo--edit">
-                                <FontAwesomeIcon icon={faEdit} id={todo_id.toString()} onClick={handleOnClickEditTodo} />
-                                </div>
-                                <div className="calendar-todo--delete">
-                                <FontAwesomeIcon icon={faTrashAlt} id={todo_id.toString()} onClick={handleOnClickDeleteTodo}/>
-                                </div>
+                            
                             </div>
 
                             </div>
-
-                       
-
                         </div>
                         </>
-            })}
+                        })}
                         </div>  
 
         </div>

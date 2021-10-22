@@ -1,0 +1,35 @@
+.todo-content { 
+    display:flex;
+}
+.todo{ width:100%;}
+.todo-content--tags{
+    color:$green;
+}
+.todo-content--tags:first-of-type{
+    margin-left:15px;
+}
+.todo-actions{
+    display: flex;
+    width:fit-content;
+    margin-left:auto !important; 
+}
+
+.todo-actions{ 
+    display:flex;
+    justify-content: flex-end;
+    .calendar-todo--validate{
+        &:hover{
+        color:$green;
+    }
+}
+    .calendar-todo--edit{
+        &:hover{
+        color:$yellow;
+    }
+}
+    .calendar-todo--delete{
+        &:hover{
+        color:$purple;
+    }
+}
+}

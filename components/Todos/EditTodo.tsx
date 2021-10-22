@@ -3,9 +3,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faCheckSquare, faTrashAlt, faEdit, faAd, faPlus, faWindowClose} from '@fortawesome/free-solid-svg-icons'; 
 import AddTags from '../Tags/AddTags';
 import useAxios from '../../hooks/useAxios';
-import { AuthContext } from '../../context/GlobalState';
 import { Todo } from '../../pages/home/Home';
-import { getJSDocTags, isConstructorDeclaration } from 'typescript';
 
 export interface tags{
         id:number, 

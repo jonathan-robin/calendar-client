@@ -25,6 +25,10 @@
         background:rgba(0,0,0,.4);
         border-radius:12px;
     }
+    background:rgba(0,0,0,.4);
+    padding:25px;
+    border-radius:5px;
+    box-shadow:1px 1px 20px rgba(255, 255, 255, 0.2);
 }
 
 .content-box__signIn{
@@ -52,30 +56,56 @@
             display:block !important;
         }
     }
+    background:rgba(0,0,0,.4);
+    padding:25px;
+    border-radius:5px;
+    box-shadow:1px 1px 20px rgba(255, 255, 255, 0.2);
 }
 .content-box__Switch{
     position:absolute;
-    width:40%;
-    margin-left:auto;
-    margin-top:8vh;
-    left:28vw;
+    display:flex;
+    top: -70px;
+    left:50%;
+    transform:translate(-50%, 0%);
     @include media ('<tablet'){
-        width:15%;
-        margin-top:9vh;
-        background:rgba(0,0,0,.4);
+        width:30%;
         border-radius:12px;
     }
-    .input-form.input-form__signIn.input-form__signIn--pseudo{
-        background:rgba(0,0,0,0.4);
-    }
     @include media ('<smallTablet'){
-        left:0;
-        margin-top:1vh;
+        left:20%;
+        top:-60px;
         display:flex;
         width:fit-content;
         padding-inline:15px;
     }
+    .home-label{ 
+        cursor:pointer; 
+        &:hover{
+            color:$green;
+        }
+    }
 }
 .input__month{ 
     margin-top:-50vw;
+}
+.content-box--chooseFilter{ 
+    display:flex;
+    width:fit-content;
+    margin-inline:auto;
+    .chooseFilter{
+        color:white;
+        margin:25px;
+        background:rgba(0,0,0,.4); 
+        padding:10px;
+        border-radius:5px;
+    }
+}
+.chooseFilter{ 
+    display:flex;
+    justify-content: center;
+    color:white;
+    cursor:pointer; 
+    &:hover{ 
+        color:$green;
+    }
 }

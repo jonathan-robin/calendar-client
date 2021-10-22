@@ -38,15 +38,15 @@ function Week(props:{handleClickWeekSelectedDate:any,  todos:Todo[] | undefined,
         <div className='calendar__background'>
             <div className="switchWeek">
                       <FontAwesomeIcon icon={faArrowLeft} onClick={handleOnClickPrevWeek}/>
+
                         <FontAwesomeIcon icon={faArrowRight} onClick={handleOnClickNextWeek}/>
             </div>
-            <div className="inner-calendar">
                 <div className="calendar-week">
                         {fullWeek.map((day,index) => { 
                             return  <div className="calendar-week--day "> 
                             <div className="week-day--day stress">
                                 {day.toLocaleDateString('fr-FR', 
-                                    {weekday: "long", year: "numeric", month: "long", day: "numeric"})}
+                                    {weekday: "long", month: "long", day: "numeric"})}
                             </div>
                             <div className="calendar-todo" id={day.toString()} key={day.toString()}>
                         
@@ -55,7 +55,7 @@ function Week(props:{handleClickWeekSelectedDate:any,  todos:Todo[] | undefined,
                                     </div>
 
                                     <div className="todo">
-                                        <div className="todo-content">
+                                        <div className="todo-content regular">
                                             {todos && todos.map((todo, index) => { 
                                                 let nd = new Date(todo.day)
                                                 if (nd.getMonth() === day.getMonth() && nd.getDate() === day.getDate() && nd.getFullYear() === day.getFullYear()){ 
@@ -63,13 +63,13 @@ function Week(props:{handleClickWeekSelectedDate:any,  todos:Todo[] | undefined,
                                                 }
                                             })}
                                         </div>
-                                        </div>
+
+                                    </div>
                         </div>
                             </div>
                         })}
                 </div> 
                 
-            </div>
     </div>
     )
 }

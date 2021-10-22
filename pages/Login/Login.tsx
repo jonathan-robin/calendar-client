@@ -47,7 +47,7 @@ function Login() {
     return (
         <div>
             <Background />
-            <Shape />
+            {/* <Shape /> */}
             <div className="content-box">
                 <div className="content-box__signIn">
                     <div className="title">

@@ -10,6 +10,7 @@ import SwitchFilter from '../../components/Home/SwitchFilter';
 import useAxios from '../../hooks/useAxios';
 import { getDefaultFormatCodeSettings } from 'typescript';
 import { AxiosResponse } from 'axios';
+import Header from '../commons/Header';
 
 export interface Todo{ 
     todo_id:number, 
@@ -75,29 +76,23 @@ function Home() {
     return (
         <div>
             <Background />
-            <Shape />
+            <Header setFilter={setFilter}/>
             {!filter.week && !filter.month && !filter.day ? 
             <div className="content-box">
-                <div className="content-box__signIn">
-            <div className="input-form input-form__signIn">
-                <div className="home-label home-label--day" onClick={handleClickDay}>
-                            {currentDate}
+                <div className="chooseFilter stress" onClick={handleClickDay}>
+                    Choisissez la vue Todo à afficher
                 </div>
+                <div className="content-box--chooseFilter stress">
+                <div className="chooseFilter chooseFilter--day" onClick={handleClickDay}>
+                           Par jour  ({currentDate})
                 </div>
-                    <div className="input-form input-form__signIn input-form__signIn--pseudo">
-                        <div className="input-form__signIn--label">
-                <div className="home-label home-label--week" onClick={handleClickWeek}>
-                            Semaine 44
+                <div className="chooseFilter chooseFilter--week" onClick={handleClickWeek}>
+                            Par semaine
                         </div>
+
+                <div className="chooseFilter chooseFilter--month" onClick={handleClickMonth}>
+                            Par mois ({new Date(currentDate).getMonth()})
                         </div>
-                    </div>
-                    <div className="input-form input-form__signIn input-form__signIn--pseudo">
-                        <div className="input-form__signIn--label">
-                <div className="home-label home-label--month" onClick={handleClickMonth}>
-                            {new Date(currentDate).getMonth()}
-                        </div>
-                        </div>
-                    </div>
                     </div>
                     </div> : 
                     <>

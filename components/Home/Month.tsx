@@ -10,6 +10,7 @@ function Month(props:{handleClickMonthSelectedDate:any, todos:Todo[] | undefined
     let date = new Date;
     var fullMonth:Date[] = [];
 
+
     const getFullMonth = (firstDayOfTheMonth:any) => {
         let numberDay:number;
         if (firstDayOfTheMonth.getMonth()%2 !== 0 && firstDayOfTheMonth.getMonth() !== 1 && firstDayOfTheMonth.getMonth() < 7 ){
@@ -46,10 +47,18 @@ function Month(props:{handleClickMonthSelectedDate:any, todos:Todo[] | undefined
         getFullMonth(new Date(firstDayOfPrevMonth));
     }
 
+
+    let monthString = new Date(); 
+    monthString.setDate(1); 
+    monthString.setFullYear(2021);
+    monthString.setMonth(month);
+
     return (
         <div className='calendar__background cb_month'>
-            <div className="switchWeek">
+            <div className="switchWeek stress">
                       <FontAwesomeIcon icon={faArrowLeft} onClick={handleOnClickPrevMonth}/>
+                      {monthString.toLocaleDateString('fr-FR', 
+                                    {month: "long"})}
                         <FontAwesomeIcon icon={faArrowRight} onClick={handleOnClickNextMonth}/>
             </div>
             <div className="inner-calendar">
@@ -67,7 +76,7 @@ function Month(props:{handleClickMonthSelectedDate:any, todos:Todo[] | undefined
                                     </div>
 
                                     <div className="todo">
-                                        <div className="todo-content">
+                                        <div className="todo-content regular">
                                             {todos?.map((todo, index) =>{
                                                 let nd = new Date(todo.day) 
                                                 if (day.getMonth() === nd.getMonth() && day.getFullYear() === nd.getFullYear() && day.getDate() === nd.getDate()){

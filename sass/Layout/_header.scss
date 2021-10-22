@@ -1,0 +1,31 @@
+.header{ 
+    width:100%; 
+    height:50px;
+    background-color:rgba(0,0,0,0.5); 
+    z-index:10;
+    align-content: center;
+    display:flex;
+    justify-content: right;
+}
+.header--right{ 
+    margin-left:auto;
+    margin-block:auto;
+    color:white;
+    margin-right:15px;
+    display:flex;
+    div:first-of-type{
+        margin-inline:12px;
+    }
+    div:last-of-type{
+        margin-inline:48px;
+        cursor:pointer; 
+        :hover{ 
+            color:$pink;
+        }
+    }
+    .Homelogo{
+        cursor:pointer; 
+        :hover{ 
+            color:$green;
+    }}
+}

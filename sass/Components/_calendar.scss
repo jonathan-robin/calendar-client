@@ -1,14 +1,16 @@
 .calendar__background{
-    width:40%;
-    margin-left:auto;
-    margin-top:8vh;
+    width:90%;
+    height:90vh;
+    // margin-left:auto;
+    margin-top:2.5vh;
     position:relative; 
+    margin-inline:auto;
     padding:0.5em;
     min-width:450px;
     @include media ('<tablet'){
-        width:50%;
+        // width:50%;
         padding:20px;
-        background:rgba(0,0,0,.4);
+        // background:rgba(0,0,0,.4);
         border-radius:12px;
     }
     .regular{
@@ -19,10 +21,7 @@
     
 }
 .todo{
-    display:flex;
     color:$pink;
-    align-items: center;
-    display:flex;
     cursor:pointer;
     div{
         margin:5px;
@@ -47,10 +46,21 @@
     width:90%;
     margin:5px;
     display:flex;
+    overflow:hidden;
 }
-
+.cb_month{
+    .calendar-todo--add{
+        margin-inline:auto;
+    }
+}
+.calendar-week, .calendar-month{
+    .todo-content{
+        color:$pink;
+    }
+}
 .inner-calendar{ 
     display:flex;
+    // flex-direction:column;
     .calendar-hour.left{
         width:50%;
    }
@@ -58,18 +68,28 @@
        width:50%;
    }
 }
+.selected-date{ 
+    display:flex;
+    margin-bottom:25px;
+    padding:4px;
+    background-color:$pink;
+    width:fit-content; 
+    border-radius:5px;
+}
 
 .calendar-week{
-    display:grid;
-    grid-template-columns: repeat(3, 1fr);
-    
+    padding:15px;
+    display:grid !important;
+    // grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
 }
 .calendar-week--day{ 
-    background:rgba(0,0,0,.3);
     padding:2px;
     border-radius:5px;
     width:90%;
     margin:5px;
+    margin-inline:auto;
+    color:white;
 }
 .calendar-week--day .calendar-todo{
     display:block;
@@ -77,30 +97,32 @@
 .switchWeek{ 
     display:flex;
     justify-content: space-between;
+    color:white;
     svg{
-    cursor :pointer;
+        cursor :pointer;
         :hover{
-            color:white;
+            color:$pink;
         }
     }
 }
 .calendar-month{ 
     display:grid; 
-    grid-template-columns: repeat(4, 4fr);
-    position:absolute;
+    grid-template-columns: repeat( auto-fit, minmax(200px, 1fr) );
+    margin-inline:auto;
+    // position:absolute;
     background:rgba(0,0,0,.3);
     border-radius:5px;
     margin-top:8vh;
     padding:10px;
-    margin-left:-10%;
-    min-width:450px;
+    // margin-left:-10%;
+    width:90vw;
     @include media ('<tablet'){
         padding:20px;
         background:rgba(0,0,0,.4);
         border-radius:12px;
     }
     .regular{
-        color:#fff;
+        // color:#fff;
         margin-bottom: 0.5em;
         width:fit-content;
     }

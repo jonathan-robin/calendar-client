@@ -1,0 +1,14 @@
+body{ 
+    margin:0;
+}
+.background-windows{
+    width:100%;
+    min-width:1920px;
+    min-height:100vh;
+    // min-width:100vh;
+    // min-height:100vh;
+    // min-height:950px;
+    position:absolute; 
+    z-index:-1;
+    overflow:hidden;
+}
