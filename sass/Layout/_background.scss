@@ -3,12 +3,10 @@ body{
 }
 .background-windows{
     width:100%;
-    min-width:1920px;
-    min-height:100vh;
-    // min-width:100vh;
-    // min-height:100vh;
-    // min-height:950px;
+    min-height:150%;
     position:absolute; 
     z-index:-1;
-    overflow:hidden;
+    background-image: url("../resources/background.jpg");
+    background-attachment:scroll;
+    background-repeat: repeat;
 }

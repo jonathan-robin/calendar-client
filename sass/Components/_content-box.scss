@@ -78,6 +78,12 @@
         width:fit-content;
         padding-inline:15px;
     }
+    @include media ('<bigPhone'){
+        left:20%;
+        top:0;
+        width:fit-content;
+        padding-inline:15px;
+    }
     .home-label{ 
         cursor:pointer; 
         &:hover{

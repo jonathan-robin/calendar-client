@@ -33,13 +33,11 @@
     position:absolute; 
     top:50%; 
     left:50%; 
-    background:rgba(255,255,255,.4);
+    background:rgba(255,255,255,.8);
     transform:translate(-50%, -50%);
     box-shadow:5px 5px 20px black;
     border-radius:5px;
-    div{ 
-        // padding:25px;
-    }
+    padding:5px;
 }
 .todo__add-title{ 
     display:flex;
@@ -82,10 +80,11 @@
     }
     svg{
         float:right;
-        color:$yellow;
+        color:$pink;
+        border-radius:25px;
         cursor:pointer;
         :hover{ 
-            color:$green;
+        color:$green;
         }
     }
 }

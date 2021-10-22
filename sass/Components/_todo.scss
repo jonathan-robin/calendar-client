@@ -1,9 +1,26 @@
 .todo-content { 
     display:flex;
 }
+.todo-content.archived{
+    animation:archived 0.5s ease-in-out; 
+    border-radius:5px;
+}
+.todo-content.archived{
+.todo-content--tags,.todo-content--text, .todo-content--tags:first-of-type
+.todo-actions{
+    color:$green;
+    animation:archived2 1s ease-in forwards; 
+}
+}
+.todocontent.archived .todo-actions .calendar-todo--validate{
+        svg{ 
+            color:$green !important;
+            animation:archived2 1s ease-in forwards; 
+        }
+}
 .todo{ width:100%;}
 .todo-content--tags{
-    color:$green;
+    color:$yellow;
 }
 .todo-content--tags:first-of-type{
     margin-left:15px;
@@ -13,7 +30,6 @@
     width:fit-content;
     margin-left:auto !important; 
 }
-
 .todo-actions{ 
     display:flex;
     justify-content: flex-end;
@@ -32,4 +48,31 @@
         color:$purple;
     }
 }
+}
+
+.todo-content-week-text{ 
+    display:flex; 
+}
+.todo-content-week-time{ 
+    font-size:small; 
+    color:$green;
+}
+.todo-content-week{
+    display:block;
+}
+
+@keyframes archived{ 
+    from{ 
+        opacity:0;
+        background-color: transparent;
+    }
+    to{ 
+        opacity:1;
+        background-color: $green;
+    }
+}
+@keyframes archived2{ 
+    to{ 
+        color:$green;
+    }
 }

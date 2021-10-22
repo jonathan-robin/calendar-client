@@ -1,28 +1,33 @@
-import React, {useState, createContext} from 'react'; 
+import React, { useState, createContext } from "react";
 
-export interface authState{
-    token:string, 
-    refreshToken:string,
-    username:string, 
-    id:number
+export interface authState {
+  token: string;
+  refreshToken: string;
+  username: string;
+  id: number;
 }
 
-export type authStateContext = [authState, React.Dispatch<React.SetStateAction<authState>>]
- 
-export const AuthContext = React.createContext<authStateContext>([{token:'',refreshToken:'',username:'', id:0}, () => null]);
+export type authStateContext = [
+  authState,
+  React.Dispatch<React.SetStateAction<authState>>
+];
 
-export const AuthProvider:any = (props:any) => {
-    const [authState, setAuthState] = useState<authState>({ 
-        token:'', 
-        refreshToken:'', 
-        username:'', 
-        id:0
-    }); 
+export const AuthContext = React.createContext<authStateContext>([
+  { token: "", refreshToken: "", username: "", id: 0 },
+  () => null,
+]);
 
-    return(
+export const AuthProvider: any = (props: any) => {
+  const [authState, setAuthState] = useState<authState>({
+    token: "",
+    refreshToken: "",
+    username: "",
+    id: 0,
+  });
+
+  return (
     <AuthContext.Provider value={[authState, setAuthState]}>
-        {props.children}
+      {props.children}
     </AuthContext.Provider>
-    );
-
+  );
 };
