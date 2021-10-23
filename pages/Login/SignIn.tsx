@@ -54,6 +54,11 @@ function SignIn() {
                 })
                 .then(async (res: any) => {
                   if (res && res.status === 200) {
+                    localStorage.setItem('token', res.data.accessToken);
+                    localStorage.setItem('refreshToken', res.data.refreshToken);
+                    localStorage.setItem('username', res.data.username);
+                    localStorage.setItem('id', res.data.id);
+
                     setAuthState({
                       ...authState,
                       token: res.data.accessToken,

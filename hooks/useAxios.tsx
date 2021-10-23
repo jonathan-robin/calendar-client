@@ -12,7 +12,7 @@ function useAxios() {
   const [authState, setAuthState] = useContext(AuthContext);
 
   const instance = axios.create({
-    baseURL: "http://localhost:5000/api/",
+    baseURL: "https://api-calendar-todo.herokuapp.com/api",
   });
 
   instance.defaults.headers.common[

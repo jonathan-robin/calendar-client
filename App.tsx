@@ -2,7 +2,8 @@ import React,{useEffect, useContext} from 'react';
 import { AuthProvider } from './context/GlobalState';
 import './sass/main.css';
 import { BrowserRouter as Router, 
-Route 
+Route, 
+HashRouter
 } from 'react-router-dom';
 import LandingPage from './pages/LandingPage/LandingPage';
 import SignIn from './pages/Login/SignIn';
@@ -24,12 +25,14 @@ function App() {
 
   return (
     <AuthProvider>
+      <HashRouter>
       <Router>
         <Route path="/" exact component={LandingPage} />
         <Route path="/SignIn" exact component={SignIn} />
         <Route path="/login" exact component={Login} />
         <Route path="/home" exact component={Home} />
       </Router>
+      </HashRouter>
     </AuthProvider>
   )
 }

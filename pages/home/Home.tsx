@@ -41,6 +41,15 @@ function Home() {
     getTodos();
   }, []);
 
+  console.log(authState)
+//   useEffect(() => {
+//     instance
+//     .get("./getTodos")
+//     .then((res:AxiosResponse<any, Todo[]>) => {return res.data})
+//     .then((res) => setTodos(res))
+
+//   },[selectedDate])
+
   const handleClickWeekSelectedDate = (selectedDate: string) => {
     setSelectedDate(new Date(selectedDate));
     setFilter({ week: false, month: false, day: true });
@@ -51,7 +60,7 @@ function Home() {
     setFilter({ week: false, month: false, day: true });
   };
 
-  const handleClickDay = () => {
+  const handleClickDay = async() => {
     setFilter({ month: false, week: false, day: true });
     setCurrentLayout("Day");
   };
@@ -82,7 +91,7 @@ function Home() {
       <Header setFilter={setFilter} />
       {!filter.week && !filter.month && !filter.day ? (
         <div className="content-box">
-          <div className="chooseFilter stress" onClick={handleClickDay}>
+          <div className="chooseFilter stress">
             Choisissez la vue Todo à afficher
           </div>
           <div className="content-box--chooseFilter stress">
@@ -118,6 +127,7 @@ function Home() {
                   current={currentLayout}
                   setCurrentLayout={setCurrentLayout}
                   setSelectedDate={setSelectedDate}
+                  getTodos={getTodos}
                 />
                 <Day
                   todos={todos}
@@ -136,6 +146,8 @@ function Home() {
                   current={currentLayout}
                   setCurrentLayout={setCurrentLayout}
                   setSelectedDate={setSelectedDate}
+                  getTodos={getTodos}
+
                 />
                 <Week
                   handleClickWeekSelectedDate={handleClickWeekSelectedDate}
@@ -154,6 +166,8 @@ function Home() {
                   current={currentLayout}
                   setCurrentLayout={setCurrentLayout}
                   setSelectedDate={setSelectedDate}
+                  getTodos={getTodos}
+
                 />
                 <Month
                   handleClickMonthSelectedDate={handleClickMonthSelectedDate}

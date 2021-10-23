@@ -1,9 +1,10 @@
-function SwitchFilter(props: {current: string; setFilter: any; currentDate: string; setCurrentLayout: any; setSelectedDate: any;}) {
+function SwitchFilter(props: {current: string; setFilter: any; currentDate: string; setCurrentLayout: any; setSelectedDate: any, getTodos:any;}) {
 
   const handleClickDay = () => {
+    props.setSelectedDate(new Date());
     props.setFilter({ day: true, month: false, week: false });
     props.setCurrentLayout("Day");
-    props.setSelectedDate(new Date());
+    props.getTodos();
   };
   const handleClickWeek = () => {
     props.setFilter({ day: false, month: false, week: true });

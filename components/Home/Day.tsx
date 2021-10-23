@@ -37,6 +37,10 @@ function Day(props: {selectedDate: Date;todos: Todo[] | undefined; getTodos: any
       })
   );
 
+  useEffect(() => { 
+    setTodos(props.getTodos());
+  },[props.selectedDate])
+
   useEffect(() => {
     instance.post("/tags").then((res) => setTags(res.data));
   }, []);

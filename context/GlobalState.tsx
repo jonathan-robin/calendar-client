@@ -1,10 +1,10 @@
 import React, { useState, createContext } from "react";
 
 export interface authState {
-  token: string;
-  refreshToken: string;
-  username: string;
-  id: number;
+  token: string | null;
+  refreshToken: string  | null;
+  username: string  | null;
+  id: number | null | string ;
 }
 
 export type authStateContext = [
@@ -19,10 +19,10 @@ export const AuthContext = React.createContext<authStateContext>([
 
 export const AuthProvider: any = (props: any) => {
   const [authState, setAuthState] = useState<authState>({
-    token: "",
-    refreshToken: "",
-    username: "",
-    id: 0,
+    token: localStorage.getItem('token'),
+    refreshToken: localStorage.getItem('refreshToken'),
+    username: localStorage.getItem('username'),
+    id: localStorage.getItem('id'),
   });
 
   return (
