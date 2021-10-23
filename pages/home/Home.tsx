@@ -41,15 +41,6 @@ function Home() {
     getTodos();
   }, []);
 
-  console.log(authState)
-//   useEffect(() => {
-//     instance
-//     .get("./getTodos")
-//     .then((res:AxiosResponse<any, Todo[]>) => {return res.data})
-//     .then((res) => setTodos(res))
-
-//   },[selectedDate])
-
   const handleClickWeekSelectedDate = (selectedDate: string) => {
     setSelectedDate(new Date(selectedDate));
     setFilter({ week: false, month: false, day: true });
@@ -112,7 +103,7 @@ function Home() {
               className="chooseFilter chooseFilter--month"
               onClick={handleClickMonth}
             >
-              Par mois ({new Date(currentDate).getMonth()})
+              Par mois ({new Date(currentDate).toLocaleString("default", { month: "long" })})
             </div>
           </div>
         </div>

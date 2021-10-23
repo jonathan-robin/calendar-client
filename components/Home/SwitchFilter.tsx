@@ -4,7 +4,6 @@ function SwitchFilter(props: {current: string; setFilter: any; currentDate: stri
     props.setSelectedDate(new Date());
     props.setFilter({ day: true, month: false, week: false });
     props.setCurrentLayout("Day");
-    props.getTodos();
   };
   const handleClickWeek = () => {
     props.setFilter({ day: false, month: false, week: true });
@@ -29,7 +28,7 @@ function SwitchFilter(props: {current: string; setFilter: any; currentDate: stri
           <div className="input-form input-form__signIn input-form__signIn--pseudo">
             <div className="input-form__signIn--label">
               <div className="home-label home-label--week" onClick={handleClickWeek}>
-                Semaine 44
+                Semaine
               </div>
             </div>
           </div>
@@ -38,7 +37,7 @@ function SwitchFilter(props: {current: string; setFilter: any; currentDate: stri
           <div className="input-form input-form__signIn input-form__signIn--pseudo">
             <div className="input-form__signIn--label">
               <div className="home-label home-label--month" onClick={handleClickMonth}>
-                Novembre
+                {props.currentDate.split(' ')[1]}
               </div>
             </div>
           </div>

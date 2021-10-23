@@ -1,5 +1,8 @@
 .todo-content { 
     display:flex;
+    @include media('<bigPhone'){
+        display:block;
+    }
 }
 .todo-content.archived{
     animation:archived 0.5s ease-in-out; 

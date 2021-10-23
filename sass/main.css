@@ -237,6 +237,12 @@
   display: flex;
 }
 
+@media (max-width: 699px) {
+  .todo-content {
+    display: block;
+  }
+}
+
 .todo-content.archived {
   -webkit-animation: archived 0.5s ease-in-out;
           animation: archived 0.5s ease-in-out;
@@ -388,6 +394,13 @@
   }
 }
 
+@media (max-width: 699px) {
+  .content-box--home {
+    width: 80%;
+    margin-inline: auto;
+  }
+}
+
 .content-box__signIn {
   width: 40%;
   margin-left: auto;
@@ -426,6 +439,13 @@
   }
 }
 
+@media (max-width: 699px) {
+  .content-box__signIn {
+    width: 80%;
+    margin-inline: auto;
+  }
+}
+
 .content-box__Switch {
   position: absolute;
   display: -webkit-box;
@@ -460,12 +480,18 @@
 
 @media (max-width: 699px) {
   .content-box__Switch {
-    left: 20%;
-    top: 0;
-    width: -webkit-fit-content;
-    width: -moz-fit-content;
-    width: fit-content;
-    padding-inline: 15px;
+    position: inherit;
+    left: inherit;
+    top: inherit;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-transform: inherit;
+            transform: inherit;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    margin-inline: auto;
   }
 }
 
@@ -915,14 +941,9 @@ body {
   margin: 0;
 }
 
-.background-windows {
-  width: 100%;
-  min-height: 150%;
-  position: absolute;
-  z-index: -1;
-  background-image: url("../resources/background.jpg");
-  background-attachment: scroll;
-  background-repeat: repeat;
+html {
+  background: url("../resources/background.jpg") no-repeat center center fixed;
+  background-size: cover;
 }
 
 .header {

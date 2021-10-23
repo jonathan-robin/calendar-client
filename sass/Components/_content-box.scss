@@ -1,3 +1,4 @@
+
 .content-box{
     position:relative; 
     padding:1vh 2vw;
@@ -24,6 +25,10 @@
         padding:20px;
         background:rgba(0,0,0,.4);
         border-radius:12px;
+    }
+    @include media ('<bigPhone'){
+        width:80%;
+        margin-inline:auto;
     }
     background:rgba(0,0,0,.4);
     padding:25px;
@@ -56,6 +61,11 @@
             display:block !important;
         }
     }
+    @include media ('<bigPhone'){
+        width:80%;
+        margin-inline:auto;
+    }
+
     background:rgba(0,0,0,.4);
     padding:25px;
     border-radius:5px;
@@ -79,10 +89,13 @@
         padding-inline:15px;
     }
     @include media ('<bigPhone'){
-        left:20%;
-        top:0;
-        width:fit-content;
-        padding-inline:15px;
+        position:inherit;
+        left:inherit;
+        top:inherit;
+        display:flex;
+        transform: inherit;
+        justify-content: center;
+        margin-inline:auto;
     }
     .home-label{ 
         cursor:pointer; 
