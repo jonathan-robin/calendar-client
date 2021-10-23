@@ -6,6 +6,7 @@ You can access the todos with a search either by day, week or month.
 
 You can create, update, archive and delete the todos as well as add tags to them and customize tags.
 
+The server-side is in nodejs on heroku.
 Link to the [live version](https://api-calendar.jonathan-robin.com).\
 Link to the [server-side](https://github.com/jonathan-robin/calendar-server.git).
 
