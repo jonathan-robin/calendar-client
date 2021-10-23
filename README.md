@@ -1,6 +1,8 @@
 # Calendar
 This the client-side of a todo-list app made for portfolio purposes.
-The todos are 
+You can access the todos with a search either by day, week or month.
+
+![calendar-todo](https://user-images.githubusercontent.com/63792769/138565001-c062e21d-c0bc-43fa-b353-ec8e732b3bd8.gif)
 
 The website allows you to search between 4 filters ;
 - Any complete draw from 1968 to 2019.
