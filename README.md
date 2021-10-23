@@ -1,28 +1,26 @@
 # Calendar
-This the client-side of a todo-list app made for portfolio purposes.
+This the client-side of a todo-list CRUD app made for portfolio purposes.\
 You can access the todos with a search either by day, week or month.
 
 ![calendar-todo](https://user-images.githubusercontent.com/63792769/138565001-c062e21d-c0bc-43fa-b353-ec8e732b3bd8.gif)
 
-The website allows you to search between 4 filters ;
-- Any complete draw from 1968 to 2019.
-- Players profile with statistics and every match played. 
-- Select a player and add filters (year, round)
-- Pet peeve
+You can create, update, archive and delete the todos as well as add tags to them and customize tags.
 
-Link to the [live version](https://api-rgstats.jonathan-robin.com).\
-Link to the [client-side](https://github.com/jonathan-robin/rgs-client.git).
+Link to the [live version](https://api-calendar.jonathan-robin.com).\
+Link to the [server-side](https://github.com/jonathan-robin/calendar-server.git).
 
 ### Built with 
 
-[Node.js](https://fr.nodejs.org/)
+[React.js](https://fr.reactjs.org/)\
+[Sass](https://sass-lang.com/)\
+[Axios]('https://axios-http.com/docs/intro')
 
 ## Getting started
 ### Prerequisities & installation
 Once the repo clone with
 
 ```
-git clone https://github.com/jonathan-robin/rgs-api.git
+git clone https://github.com/jonathan-robin/calendar-client.git
 ```
 if not already installed, install npm 
 ```
@@ -34,14 +32,14 @@ npm install
 ```
 To run the app locally, run 
 ```
-node index.js
+npm start
 ```
 ## Usage
-The server won't connect to the db since the .env variables aren't included. Change the variables
+Once the repo cloned, the request will keep going to the heroku server, change the 
 ```
-mysql.createConnection({ database, host, username, pass})
+const instance = axios.create({ baseURL })
 ```
-in the ```config/database.js``` file with your own and then feel free to contact me to get a copy of the db to run locally.
+variables baseURL in the ```hooks/useAxios.tsx``` file with your own server to run it locally.
 
 ## Contributing
 
